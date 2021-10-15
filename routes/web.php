@@ -13,10 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\AccountsController;
+
 Route::get('/', function () {
     return view('home');
 });
 
-Auth::routes(['register' => false]);
+Auth::routes(['register' => false, 'reset' => false]);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('accounts/add', function() {
+        return view('accounts.add');
+    })->name('add_account');
+    Route::post('accounts/add', [AccountsController::class, 'register'])->name('post_add_account');
+});
