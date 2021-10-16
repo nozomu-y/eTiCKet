@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -61,8 +60,8 @@ class AccountsController extends Controller
         }
 
         return $request->wantsJson()
-                    ? new JsonResponse([], 201)
-                    : redirect($this->redirectPath());
+            ? new JsonResponse([], 201)
+            : redirect($this->redirectPath());
     }
 
     /**
@@ -98,6 +97,16 @@ class AccountsController extends Controller
 
     function index()
     {
-        return view('accounts.list');
+        $users = User::All();
+        $data = [];
+        foreach ($users as $user) {
+            $user_data = [];
+            $user_data['id'] = $user->id;
+            $user_data['name'] = $user->name;
+            $user_data['username'] = $user->username;
+            $user_data['role'] = $user->role;
+            array_push($data, $user_data);
+        }
+        return view('accounts.list', ['users' => $data]);
     }
 }
