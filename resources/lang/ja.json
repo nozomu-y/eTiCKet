@@ -1,0 +1,14 @@
+{
+    "add": "追加",
+
+    "add_event": "イベントを追加する",
+    "event_name": "イベント名",
+    "date": "日付",
+    "place": "場所",
+    "open_at": "開場時間",
+    "start_at": "開演時間",
+    "end_at": "終演時間",
+    "expire_at": "有効期限",
+    
+    "EOF": "EOF"
+}
