@@ -14,7 +14,7 @@ class CreateTableEvents extends Migration
     public function up()
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->id('event_id');
+            $table->bigIncrements('event_id');
             $table->string('name');
             $table->string('place');
             $table->date('date');
@@ -23,7 +23,6 @@ class CreateTableEvents extends Migration
             $table->datetime('end_at')->nullable();
             $table->datetime('expire_at');
             $table->string('memo')->nullable();
-            $table->timestamps('created_at');
         });
     }
 
