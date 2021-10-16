@@ -1,14 +1,19 @@
 {
     "add": "追加",
 
+    "event": "イベント",
+    "event_information": "イベント情報",
     "event_list": "イベント一覧",
     "add_event": "イベントを追加する",
     "event_name": "イベント名",
     "date": "日付",
     "place": "場所",
-    "open_at": "開場時間",
-    "start_at": "開演時間",
-    "end_at": "終演時間",
+    "open_at": "開場時刻",
+    "start_at": "開演時刻",
+    "end_at": "終演時刻",
+    "open_at_abbrev": "開場",
+    "start_at_abbrev": "開演",
+    "end_at_abbrev": "終演",
     "expire_at": "有効期限",
 
     "delete_event": "イベントを削除する",
