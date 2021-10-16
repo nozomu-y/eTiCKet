@@ -22,4 +22,11 @@ class Events extends Model
      * @var string
      */
     protected $primaryKey = 'event_id';
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }
