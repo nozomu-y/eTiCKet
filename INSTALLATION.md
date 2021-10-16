@@ -3,7 +3,7 @@ Installation
 
 ## Install dependencies
 ```sh
-comoser install
+composer install
 ```
 
 ## Setup Laravel
