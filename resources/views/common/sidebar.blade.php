@@ -13,6 +13,7 @@
             <span>Home</span>
         </a>
     </li>
+    @if (Auth::user()->role == 'admin')
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="">
@@ -20,6 +21,7 @@
             <span>アカウント一覧</span>
         </a>
     </li>
+    @endif
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="">
