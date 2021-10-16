@@ -6,7 +6,7 @@
 Electronic Ticketing System developed for Concerts
 </p>
 <p align="center">
-<a href="https://github.com/nozomu-y/eTiCKet/blob/master/LICENSE">
+<a href="https://github.com/nozomu-y/eTiCKet/blob/main/LICENSE">
 <img src="https://img.shields.io/github/license/nozomu-y/eTiCKet" alt="License"></img>
 </a>
 <!--
@@ -23,7 +23,7 @@ Electronic Ticketing System developed for Concerts
     <img src="https://img.shields.io/github/issues-pr/nozomu-y/eTiCKet?color=4e73df" alt="GitHub pull requests"></img>
 </a>
 <!--
-<img src="https://img.shields.io/github/commits-since/nozomu-y/eTiCKet/latest/master" alt="GitHub commits since tagged version"></img>
+<img src="https://img.shields.io/github/commits-since/nozomu-y/eTiCKet/latest/main" alt="GitHub commits since tagged version"></img>
 -->
 </p>
 </p>
@@ -42,6 +42,6 @@ eTiCKet is an electronic ticketing system developed for concerts.
 * MySQL 5.7
 
 ## License
-This software is licensed under [the MIT License](https://github.com/nozomu-y/eTiCKet/blob/master/LICENSE). 
+This software is licensed under [the MIT License](https://github.com/nozomu-y/eTiCKet/blob/main/LICENSE). 
 
-[Installation]: https://github.com/nozomu-y/eTiCKet/blob/master/INSTALLATION.md
+[Installation]: https://github.com/nozomu-y/eTiCKet/blob/main/INSTALLATION.md
