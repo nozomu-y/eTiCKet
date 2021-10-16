@@ -25,6 +25,12 @@ Auth::routes(['register' => false, 'reset' => false]);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('events', [EventsController::class, 'index'])->name('events');
+Route::get('events/{id}', [EventsController::class, 'detail'])->name('event_detail');
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('events/add', function() {
+        return view('events.add');
+    })->name('add_event');
+});
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('accounts', [AccountsController::class, 'index'])->name('accounts');
