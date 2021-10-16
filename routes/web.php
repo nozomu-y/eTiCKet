@@ -25,11 +25,12 @@ Auth::routes(['register' => false, 'reset' => false]);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('events', [EventsController::class, 'index'])->name('events');
-Route::get('events/{id}', [EventsController::class, 'detail'])->name('event_detail');
+Route::get('events/{id}', [EventsController::class, 'detail'])->where('id', '[0-9]+')->name('event_detail');
 Route::group(['middleware' => 'admin'], function () {
     Route::get('events/add', function() {
         return view('events.add');
     })->name('add_event');
+    Route::post('events/add', [EventsController::class, 'add'])->name('post_add_event');
 });
 
 Route::group(['middleware' => 'admin'], function () {
