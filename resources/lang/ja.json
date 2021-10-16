@@ -1,5 +1,18 @@
 {
+    "home": "ホーム",
+    "account_setting": "アカウント設定",
+    "change_password": "パスワード変更",
+
     "add": "追加",
+    "change": "変更",
+    "name": "名前",
+    "username": "ユーザー名",
+    "password": "パスワード",
+    "current_password": "現在のパスワード",
+    "new_password": "新しいパスワード",
+    "password_confirm": "確認用パスワード",
+
+    "add_account": "アカウント追加",
 
     "event": "イベント",
     "event_information": "イベント情報",
