@@ -24,6 +24,7 @@ Auth::routes(['register' => false, 'reset' => false]);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'admin'], function () {
+    Route::get('accounts', [AccountsController::class, 'index'])->name('accounts');
     Route::get('accounts/add', function() {
         return view('accounts.add');
     })->name('add_account');
