@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Http\Controllers\AccountsController;
+use App\Http\Controllers\EventsController;
 
 Route::get('/', function () {
     return view('home');
@@ -22,6 +23,8 @@ Route::get('/', function () {
 Auth::routes(['register' => false, 'reset' => false]);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('events', [EventsController::class, 'index'])->name('events');
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('accounts', [AccountsController::class, 'index'])->name('accounts');
