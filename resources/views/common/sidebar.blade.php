@@ -24,7 +24,7 @@
     @endif
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('events') }}">
             <i class="fas fa-qrcode fa-fw"></i>
             <span>電子チケット</span>
         </a>
