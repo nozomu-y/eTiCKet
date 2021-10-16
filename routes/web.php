@@ -31,6 +31,7 @@ Route::group(['middleware' => 'admin'], function () {
         return view('events.add');
     })->name('add_event');
     Route::post('events/add', [EventsController::class, 'add'])->name('post_add_event');
+    Route::post('events/delete/{id}', [EventsController::class, 'delete'])->where('id', '[0-9]+')->name('delete_event');
 });
 
 Route::group(['middleware' => 'admin'], function () {

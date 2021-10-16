@@ -62,4 +62,13 @@ class EventsController extends Controller
             'expire_at' => ['required', 'date_format:Y-m-d\TH:i'],
         ]);
     }
+
+    function delete($id)
+    {
+        $result = Events::where('event_id', $id)->delete();
+        if (!$result) {
+            return redirect()->route('events')->with('error', __('message.event.delete.error'));
+        }
+        return redirect()->route('events')->with('success', __('message.event.delete.success'));
+    }
 }

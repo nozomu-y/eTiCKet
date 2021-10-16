@@ -11,7 +11,7 @@
         </nav>
         <div class="row">
             <div class="col-lg-4">
-                <div class="card">
+                <div class="card mb-4">
                     <div class="card-header">
                         イベント情報
                     </div>
@@ -35,6 +35,20 @@
                             有効期限：{{ $event->expire_at }}
                         </p>
                     </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-4">
+                <div class="list-group mb-4">
+                    <a class="list-group-item list-group-item-action">{{ __('ticket_list') }}</a>
+                    <a class="list-group-item list-group-item-action">{{ __('edit_event') }}</a>
+                    <a class="list-group-item list-group-item-action text-danger"
+                       onclick="if (confirm('{{ __('message.confirm.event.delete') }}')) {event.preventDefault(); document.getElementById('delete-form').submit();}"
+                        >{{ __('delete_event') }}</a>
+                    <form id="delete-form" action="{{ route('delete_event', ['id' => $event->event_id]) }}" method="POST" class="d-none">
+                    @csrf
+                </form>
                 </div>
             </div>
         </div>
