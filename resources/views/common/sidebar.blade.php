@@ -16,7 +16,7 @@
     @if (Auth::user()->role == 'admin')
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('accounts') }}">
             <i class="fas fa-users fa-fw"></i>
             <span>アカウント一覧</span>
         </a>

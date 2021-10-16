@@ -95,4 +95,9 @@ class AccountsController extends Controller
             'role' => 'member',
         ]);
     }
+
+    function index()
+    {
+        return view('accounts.list');
+    }
 }
