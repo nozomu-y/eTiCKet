@@ -1,7 +1,6 @@
 <!-- <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p> -->
 
 <p align="center">
-<img width="180px" src="https://www.chorkleines.com/logo.png" align="center" alt="Chor Kleines Logo"></img>
 <h1 align="center">eTiCKet</h1>
 <p align="center">
 Electronic Ticketing System developed for Concerts
