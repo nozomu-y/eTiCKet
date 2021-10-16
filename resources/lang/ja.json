@@ -1,6 +1,7 @@
 {
     "add": "追加",
 
+    "event_list": "イベント一覧",
     "add_event": "イベントを追加する",
     "event_name": "イベント名",
     "date": "日付",
@@ -9,6 +10,10 @@
     "start_at": "開演時間",
     "end_at": "終演時間",
     "expire_at": "有効期限",
+
+    "delete_event": "イベントを削除する",
+    "ticket_list": "チケット一覧",
+    "edit_event": "イベントを編集する",
     
     "EOF": "EOF"
 }
