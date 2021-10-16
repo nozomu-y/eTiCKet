@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\AccountSettingController;
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\EventsController;
 
@@ -23,6 +24,11 @@ Route::get('/', function () {
 Auth::routes(['register' => false, 'reset' => false]);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('account_setting/change_password', function () {
+    return view('account_setting.change_password');
+})->name('change_password');
+Route::post('account_setting/change_password', [AccountSettingController::class, 'change_password'])->name('post_change_password');
 
 Route::get('events', [EventsController::class, 'index'])->name('events');
 Route::get('events/{id}', [EventsController::class, 'detail'])->where('id', '[0-9]+')->name('event_detail');
