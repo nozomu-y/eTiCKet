@@ -32,10 +32,11 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>{{ __('ticket_id') }}</th>
-                            <th>{{ __('seat') }}</th>
-                            <th>{{ __('door') }}</th>
+                            <th>{{ __('ticket_no') }}</th>
+                            <th>{{ __('seat_no') }}</th>
+                            <th>{{ __('door_no') }}</th>
                             <th>{{ __('price') }}</th>
+                            <th>{{ __('status') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,6 +46,7 @@
                                 <td>{{ $ticket->seat }}</td>
                                 <td>{{ $ticket->door }}</td>
                                 <td>{{ $ticket->price }}</td>
+                                <td>{{ $ticket->is_issued ? __('issued') : "" }}</td>
                             </tr>
                         @endforeach
                     </tbody>
