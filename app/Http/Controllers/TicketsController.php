@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use App\Models\Events;
 use App\Models\Tickets;
 use App\Enums\SeatType;
@@ -75,4 +76,39 @@ class TicketsController extends Controller
         $event->save();
         return redirect()->route('tickets', ['event_id' => $event_id])->with('success', __('message.tickets.add.success'));
     }
+
+    function issue($event_id)
+    {
+        $event = Events::where('event_id', $event_id)->get()->first();
+        $tickets = Tickets::where('event_id', $event_id)->get();
+        return view(
+            'tickets.issue',
+            [
+                'event' => $event,
+                'tickets' => $tickets
+            ]
+        );
+    }
+
+    function post_issue(Request $request, $event_id)
+    {
+        $event = Events::where('event_id', $event_id)->get()->first();
+        $data = array();
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'check') === false) {
+                continue;
+            }
+            if ($value != 1) {
+                continue;
+            }
+            $ticket_id = (int)explode("_", $key)[1];
+            $ticket = Tickets::where('event_id', $event->event_id)->where('ticket_id', $ticket_id)->get()->first();
+            $ticket->token = Str::random(32);
+            $ticket->is_issued = 1;
+            $ticket->save();
+            $data[] = array($ticket->ticket_id, $ticket->token);
+        }
+        return view('tickets.links', ['data' => $data, 'event' => $event])->with('success', __('message.tickets.issue.success'));
+    }
 }
+

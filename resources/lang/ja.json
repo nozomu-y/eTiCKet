@@ -33,6 +33,11 @@
     "delete_event": "イベントを削除する",
     "ticket_list": "チケット一覧",
     "edit_event": "イベントを編集する",
+
+    "add_tickets": "チケットを追加する",
+    "add_tickets_abbrev": "チケット追加",
+    "issue_tickets": "チケットを発券する",
+    "issue_tickets_abbrev": "チケット発券",
     
     "EOF": "EOF"
 }

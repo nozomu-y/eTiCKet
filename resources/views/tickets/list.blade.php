@@ -49,7 +49,6 @@
                         @endforeach
                     </tbody>
                 </table>
-                <a class="btn btn-primary" href="{{ route('add_tickets', ['event_id' => $event->event_id]) }}">{{ __('add_tickets') }}</a>
             </div>
         </div>
     </div>
