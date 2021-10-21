@@ -44,6 +44,10 @@
                 <div class="list-group mb-4">
                     <a class="list-group-item list-group-item-action"
                         href="{{ route('tickets', ['event_id' => $event->event_id]) }}">{{ __('ticket_list') }}</a>
+                    <a class="list-group-item list-group-item-action"
+                        href="{{ route('add_tickets', ['event_id' => $event->event_id]) }}">{{ __('add_tickets') }}</a>
+                    <a class="list-group-item list-group-item-action"
+                        href="{{ route('issue_tickets', ['event_id' => $event->event_id]) }}">{{ __('issue_tickets') }}</a>
                     <a class="list-group-item list-group-item-action">{{ __('edit_event') }}</a>
                     <a class="list-group-item list-group-item-action text-danger"
                         onclick="if (confirm('{{ __('message.events.delete.confirm') }}')) {event.preventDefault(); document.getElementById('delete-form').submit();}">{{ __('delete_event') }}</a>
