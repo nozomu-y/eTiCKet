@@ -42,9 +42,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                @if (Auth::user()->role == 'admin')
-                    <a class="btn btn-primary" href="{{ route('add_event') }}">{{ __('add_event') }}</a>
-                @endif
+                <a class="btn btn-primary" href="{{ route('add_event') }}">{{ __('add_event') }}</a>
             </div>
         </div>
     </div>
