@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountSettingController;
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\TicketsController;
 
 Route::get('/', function () {
     return view('home');
@@ -31,14 +32,12 @@ Route::get('account_setting/change_password', function () {
 Route::post('account_setting/change_password', [AccountSettingController::class, 'change_password'])->name('post_change_password');
 
 Route::get('events', [EventsController::class, 'index'])->name('events');
-Route::get('events/{id}', [EventsController::class, 'detail'])->where('id', '[0-9]+')->name('event_detail');
-Route::group(['middleware' => 'admin'], function () {
-    Route::get('events/add', function() {
-        return view('events.add');
-    })->name('add_event');
-    Route::post('events/add', [EventsController::class, 'add'])->name('post_add_event');
-    Route::post('events/delete/{id}', [EventsController::class, 'delete'])->where('id', '[0-9]+')->name('delete_event');
-});
+Route::get('events/{event_id}', [EventsController::class, 'detail'])->where('event_id', '[0-9]+')->name('event_detail');
+Route::get('events/add', function() { return view('events.add'); })->name('add_event');
+Route::post('events/add', [EventsController::class, 'add'])->name('post_add_event');
+Route::post('events/delete/{event_id}', [EventsController::class, 'delete'])->where('event_id', '[0-9]+')->name('delete_event');
+Route::get('events/{event_id}/tickets', [TicketsController::class, 'index'])->where('event_id', '[0-9]+')->name('tickets');
+Route::get('events/{event_id}/tickets/add', [TicketsController::class, 'add'])->where('event_id', '[0-9]+')->name('add_tickets');
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('accounts', [AccountsController::class, 'index'])->name('accounts');

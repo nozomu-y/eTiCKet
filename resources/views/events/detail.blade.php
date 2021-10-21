@@ -42,11 +42,12 @@
             </div>
             <div class="col-lg-4">
                 <div class="list-group mb-4">
-                    <a class="list-group-item list-group-item-action">{{ __('ticket_list') }}</a>
+                    <a class="list-group-item list-group-item-action"
+                        href="{{ route('tickets', ['event_id' => $event->event_id]) }}">{{ __('ticket_list') }}</a>
                     <a class="list-group-item list-group-item-action">{{ __('edit_event') }}</a>
                     <a class="list-group-item list-group-item-action text-danger"
                         onclick="if (confirm('{{ __('message.events.delete.confirm') }}')) {event.preventDefault(); document.getElementById('delete-form').submit();}">{{ __('delete_event') }}</a>
-                    <form id="delete-form" action="{{ route('delete_event', ['id' => $event->event_id]) }}" method="POST"
+                    <form id="delete-form" action="{{ route('delete_event', ['event_id' => $event->event_id]) }}" method="POST"
                         class="d-none">
                         @csrf
                     </form>
