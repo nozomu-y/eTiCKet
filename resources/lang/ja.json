@@ -38,6 +38,12 @@
     "add_tickets_abbrev": "チケット追加",
     "issue_tickets": "チケットを発券する",
     "issue_tickets_abbrev": "チケット発券",
+    "issued": "発券済み",
+    "ticket_no": "チケット番号",
+    "seat_no": "座席番号",
+    "door_no": "ドア番号",
+    "price": "値段",
+    "status": "状況",
     
     "EOF": "EOF"
 }
