@@ -17,6 +17,7 @@ use App\Http\Controllers\AccountSettingController;
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\TicketsController;
+use App\Http\Controllers\GuestTicketsController;
 
 Route::get('/', function () {
     return view('home');
@@ -48,4 +49,9 @@ Route::group(['middleware' => 'admin'], function () {
         return view('accounts.add');
     })->name('add_account');
     Route::post('accounts/add', [AccountsController::class, 'register'])->name('post_add_account');
+});
+
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('{event_id}/{ticket_id}/{token}', [GuestTicketsController::class, 'index'])
+        ->where(['event_id', '[0-9]+', 'ticket_id', '[0-9]+', 'token', '[0-9a-zA-Z]+'])->name('guest_ticket');
 });
