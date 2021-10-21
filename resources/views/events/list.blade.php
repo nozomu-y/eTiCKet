@@ -34,7 +34,7 @@
                         @foreach ($events as $event)
                             <tr>
                                 <td><a
-                                        href="{{ route('event_detail', ['id' => $event->event_id]) }}">{{ $event->name }}</a>
+                                        href="{{ route('event_detail', ['event_id' => $event->event_id]) }}">{{ $event->name }}</a>
                                 </td>
                                 <td>{{ $event->place }}</td>
                                 <td>{{ $event->date }}</td>
