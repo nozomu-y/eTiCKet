@@ -1,12 +1,20 @@
 @extends('layouts.main')
-@section('title', __('add_tickets'))
+@section('title', __('add_tickets_abbrev'))
 
 @section('content')
     <div class="container-fluid">
+        <h1 class="h3 text-gray-800 mb-4">{{ __('add_tickets_abbrev') }}</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('events') }}">{{ __('event_list') }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('event_detail', ['event_id' => $event->event_id]) }}">{{ $event->name }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ __('add_tickets_abbrev') }}</li>
+            </ol>
+        </nav>
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('add_tickets') }}</div>
+                    <div class="card-header">{{ __('add_tickets_abbrev') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('post_add_tickets', ['event_id' => $event->event_id]) }}">
