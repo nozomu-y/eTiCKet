@@ -44,6 +44,9 @@
     "door_no": "ドア番号",
     "price": "値段",
     "status": "状況",
+
+    "reserved": "指定席",
+    "unreserved": "自由席",
     
     "EOF": "EOF"
 }
