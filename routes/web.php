@@ -13,11 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AccountSettingController;
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\GuestTicketsController;
+use App\Http\Controllers\FrontController;
 
 Route::get('/', function () {
     return view('home');
@@ -25,7 +27,10 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false, 'reset' => false]);
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('front/qrreader', [FrontController::class, 'qrreader'])->name('qrreader');
+Route::post('front/qrreader', [FrontController::class, 'post_qrreader'])->name('post_qrreader');
 
 Route::get('account_setting/change_password', function () {
     return view('account_setting.change_password');
