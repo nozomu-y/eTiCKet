@@ -45,7 +45,7 @@
                     <a class="list-group-item list-group-item-action">{{ __('ticket_list') }}</a>
                     <a class="list-group-item list-group-item-action">{{ __('edit_event') }}</a>
                     <a class="list-group-item list-group-item-action text-danger"
-                        onclick="if (confirm('{{ __('message.confirm.event.delete') }}')) {event.preventDefault(); document.getElementById('delete-form').submit();}">{{ __('delete_event') }}</a>
+                        onclick="if (confirm('{{ __('message.events.delete.confirm') }}')) {event.preventDefault(); document.getElementById('delete-form').submit();}">{{ __('delete_event') }}</a>
                     <form id="delete-form" action="{{ route('delete_event', ['id' => $event->event_id]) }}" method="POST"
                         class="d-none">
                         @csrf

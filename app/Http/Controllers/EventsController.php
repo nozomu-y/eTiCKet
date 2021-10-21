@@ -67,8 +67,8 @@ class EventsController extends Controller
     {
         $result = Events::where('event_id', $id)->delete();
         if (!$result) {
-            return redirect()->route('events')->with('error', __('message.event.delete.error'));
+            return redirect()->route('events')->with('error', __('message.events.delete.error'));
         }
-        return redirect()->route('events')->with('success', __('message.event.delete.success'));
+        return redirect()->route('events')->with('success', __('message.events.delete.success'));
     }
 }
