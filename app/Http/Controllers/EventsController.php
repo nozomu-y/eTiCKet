@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Enums\SeatType;
 use App\Models\Events;
 
 class EventsController extends Controller
@@ -45,6 +46,7 @@ class EventsController extends Controller
             $event->end_at = $request['end_at'];
         }
         $event->expire_at = $request['expire_at'];
+        $event->seat_type = $request['seat_type'];
         $event->save();
 
         return redirect()->route('events');
@@ -66,6 +68,7 @@ class EventsController extends Controller
             'start_at' => ['date_format:H:i', 'nullable'],
             'end_at' => ['date_format:H:i', 'nullable'],
             'expire_at' => ['required', 'date_format:Y-m-d\TH:i'],
+            'seat_type' => ['required'],
         ]);
     }
 

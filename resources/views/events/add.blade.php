@@ -1,12 +1,21 @@
+<?php
+    use App\Enums\SeatType;
+?>
 @extends('layouts.main')
+@section('title', __('add_event'))
 
 @section('content')
     <div class="container-fluid">
+        <h1 class="h3 text-gray-800 mb-4">{{ __('add_event') }}</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('events') }}">{{ __('event_list') }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ __('add_event') }}</li>
+            </ol>
+        </nav>
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('add_event') }}</div>
-
                     <div class="card-body">
                         <form method="POST" action="{{ route('post_add_event') }}">
                             @csrf
@@ -104,6 +113,20 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="seat_type" class="col-md-4 col-form-label text-md-right">{{ __('seat_type') }}</label>
+                                <div class="col-md-6">
+                                    <select name="seat_type" id="seat_type" class="form-control @error('seat_type') is-invalid @enderror" value="{{ old('seat_type') }}" required>
+                                        <option value="{{ SeatType::RESERVED }}">{{ __('reserved') }}</option>
+                                        <option value="{{ SeatType::UNRESERVED }}">{{ __('unreserved') }}</option>
+                                    </select>
+                                    @error('seat_type')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
