@@ -47,6 +47,14 @@
 
     "reserved": "指定席",
     "unreserved": "自由席",
+
+    "yes": "はい",
+    "no": "いいえ",
+    "go_back": "戻る",
+    "go_home": "ホームに戻る",
+    "scan_more": "追加で読み取る",
+    
+    "qrreader": "QRコード読み取り",
     
     "EOF": "EOF"
 }

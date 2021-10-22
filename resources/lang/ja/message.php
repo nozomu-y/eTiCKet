@@ -19,4 +19,14 @@ return [
             'success' => 'チケットを発券しました。',
         ],
     ],
+    'front' => [
+        'collect' => [
+            'confirm' => '観客の入場処理を行いますか？',
+            'confirmed' => '観客の入場処理が完了しました。',
+        ],
+        'error' => [
+            'ticket_invalid' => 'チケットが無効です。',
+            'already_checked_in' => '入場処理が既に完了しています。'
+        ],
+    ],
 ];

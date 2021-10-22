@@ -36,9 +36,9 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>{{ __('ticket_id') }}</th>
-                                <th>{{ __('seat') }}</th>
-                                <th>{{ __('door') }}</th>
+                                <th>{{ __('ticket_no') }}</th>
+                                <th>{{ __('seat_no') }}</th>
+                                <th>{{ __('door_no') }}</th>
                                 <th>{{ __('price') }}</th>
                             </tr>
                         </thead>

@@ -3,9 +3,10 @@
 
 @section('style')
     <style>
-video {
-    width: 100% !important;
-}
+        video {
+            width: 100% !important;
+        }
+
     </style>
 @endsection
 
