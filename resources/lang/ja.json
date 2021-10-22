@@ -20,6 +20,7 @@
     "event_list": "イベント一覧",
     "add_event": "イベントを追加する",
     "event_name": "イベント名",
+    "hall": "ホール",
     "date": "日付",
     "place": "場所",
     "open_at": "開場時刻",
@@ -63,6 +64,7 @@
     "role": "アカウント権限",
     "ticket_detail": "チケット詳細",
     "ticket_url": "チケットURL",
+    "seat_type": "座席",
     
     "qrreader": "QRコード読み取り",
     
