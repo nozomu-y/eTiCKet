@@ -39,6 +39,12 @@
 
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}">
+                            <i class="fas fa-home fa-fw mr-2"></i>
+                            {{ __('home') }}
+                        </a>
+                    </li>
                     @if (Auth::user()->role == 'admin')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('accounts') }}">
