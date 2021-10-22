@@ -8,6 +8,11 @@ use App\Models\Tickets;
 
 class FrontController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function qrreader()
     {
         return view('front.qrreader');
