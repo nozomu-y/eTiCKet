@@ -32,8 +32,8 @@
                 <div class="form-group">
                     <textarea class="form-control" rows="10">{{ $links }}</textarea>
                 </div>
-                <a class="btn btn-primary" href="{{ route('issue_tickets', ['event_id' => $event->event_id]) }}">{{ __('issue_more_tickets') }}</a>
                 <a class="btn btn-secondary" href="{{ route('event_detail', ['event_id' => $event->event_id]) }}">{{ __('return_to_event_detail') }}</a>
+                <a class="btn btn-primary" href="{{ route('issue_tickets', ['event_id' => $event->event_id]) }}">{{ __('issue_more_tickets') }}</a>
             </div>
         </div>
     </div>
