@@ -1,3 +1,6 @@
+<?php
+    use App\Enums\SeatType;
+?>
 @extends('layouts.main')
 @section('title', $event->name)
 
@@ -46,6 +49,10 @@
                                     <tr>
                                         <th class="text-nowrap pr-3">{{ __('expire_at') }}</th>
                                         <td>{{ date('Y/m/d H:i', strtotime($event->expire_at)) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('seat_type') }}</th>
+                                        <td>{{ SeatType::getDescription($event->seat_type) }}</td>
                                     </tr>
                             </tbody>
                         </table>
