@@ -78,3 +78,7 @@ body {
     width: 2.3125rem;
     height: 2.3125rem;
 }
+
+table th {
+    font-weight: 600;
+}

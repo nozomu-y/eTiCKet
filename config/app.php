@@ -230,5 +230,5 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
+    'corporation_name'  => env('CORPORATION_NAME', '団体名')
 ];
