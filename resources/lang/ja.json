@@ -61,6 +61,8 @@
     "electronic_tickets": "電子チケット",
     "remember_me": "ログイン情報を保存する",
     "role": "アカウント権限",
+    "ticket_detail": "チケット詳細",
+    "ticket_url": "チケットURL",
     
     "qrreader": "QRコード読み取り",
     
