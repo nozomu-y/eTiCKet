@@ -11,6 +11,11 @@ use App\Enums\SeatType;
 
 class TicketsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function index($event_id)
     {
         $event = Events::where('event_id', $event_id)->get()->first();
@@ -109,6 +114,14 @@ class TicketsController extends Controller
             $data[] = array($ticket->ticket_id, $ticket->token);
         }
         return view('tickets.links', ['data' => $data, 'event' => $event])->with('success', __('message.tickets.issue.success'));
+    }
+
+    function show_ticket($event_id, $ticket_id)
+    {
+        $event = Events::where('event_id', $event_id)->get()->first();
+        $ticket = Tickets::where('event_id', $event_id)->where('ticket_id', $ticket_id)->get()->first();
+        $seat_type = SeatType::getDescription($event->seat_type);
+        return view('tickets.show', ['event' => $event, 'ticket' => $ticket, 'seat_type' => $seat_type]);
     }
 }
 

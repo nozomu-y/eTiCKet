@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class AccountSettingController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function change_password(Request $request)
     {
         $user = Auth::user();
