@@ -50,7 +50,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('events') }}">
                             <i class="fas fa-qrcode fa-fw mr-2"></i>
-                            {{ __('electornic_tickets') }}
+                            {{ __('electronic_tickets') }}
                         </a>
                     </li>
                     {{-- <li class="nav-item"> --}}
