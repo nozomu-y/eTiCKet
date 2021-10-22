@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Enums\SeatType;
 use App\Models\Events;
+use App\Models\Tickets;
 
 class EventsController extends Controller
 {
@@ -75,6 +76,10 @@ class EventsController extends Controller
     function delete($id)
     {
         $result = Events::where('event_id', $id)->delete();
+        if (!$result) {
+            return redirect()->route('events')->with('error', __('message.events.delete.error'));
+        }
+        $result = Tickets::where('event_id', $id)->delete();
         if (!$result) {
             return redirect()->route('events')->with('error', __('message.events.delete.error'));
         }
