@@ -86,6 +86,9 @@ use App\Libs\Common;
                     [25, 50, 100, "全件"]
                 ],
                 "columnDefs": [{
+                    orderable: false,
+                    targets: 0
+                }, {
                     type: "currency",
                     targets: 4
                 }],
