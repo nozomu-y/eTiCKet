@@ -6,8 +6,10 @@
                     data-target="#navbar" aria-controls="nabvar" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
+                <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name') }}</a>
+            @else
+                <a class="navbar-brand" href="#">{{ config('app.name') }}</a>
             @endif
-            <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name') }}</a>
         </div>
 
         @if (!Auth::guest())
