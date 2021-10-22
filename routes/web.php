@@ -48,6 +48,7 @@ Route::get('events/{event_id}/tickets/add', [TicketsController::class, 'add'])->
 Route::post('events/{event_id}/tickets/add', [TicketsController::class, 'post_add'])->where('event_id', '[0-9]+')->name('post_add_tickets');
 Route::get('events/{event_id}/tickets/issue', [TicketsController::class, 'issue'])->where('event_id', '[0-9]+')->name('issue_tickets');
 Route::post('events/{event_id}/tickets/issue', [TicketsController::class, 'post_issue'])->where('event_id', '[0-9]+')->name('post_issue_tickets');
+Route::get('events/{event_id}/tickets/{ticket_id}', [TicketsController::class, 'show_ticket'])->where('event_id', '[0-9]+')->where('ticket_id', '[0-9]+')->name('show_ticket');
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('accounts', [AccountsController::class, 'index'])->name('accounts');
