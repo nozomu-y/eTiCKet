@@ -13,11 +13,8 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="card mb-4">
-                    <div class="card-header">
-                        {{ __('event_information') }}
-                    </div>
                     <div class="card-body">
-                        <h4>{{ $event->name }}</h4>
+                        <h3 class="h5">{{ $event->name }}</h3>
                         <table class="mt-2">
                             <tbody>
                                 <tr>
