@@ -66,6 +66,9 @@
     "ticket_detail": "チケット詳細",
     "ticket_url": "チケットURL",
     "seat_type": "座席",
+
+    "return_to_event_detail": "イベント詳細に戻る",
+    "issue_more_tickets": "追加でチケットを発券する",
     
     "qrreader": "QRコード読み取り",
     
