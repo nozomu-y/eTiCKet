@@ -34,7 +34,7 @@ use App\Libs\Common;
                     </div>
                 @endif
                 <div class="mb-3">
-                    <table class="table" id="tickets_table" style="min-width: 100%;">
+                    <table class="table table-hover" id="tickets_table" style="min-width: 100%;">
                         <thead>
                             <tr>
                                 <th class="text-nowrap">{{ __('ticket_no') }}</th>
@@ -47,7 +47,8 @@ use App\Libs\Common;
                         </thead>
                         <tbody>
                             @foreach ($tickets as $ticket)
-                                <tr>
+                                <tr
+                                    onclick="window.location='{{ route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}'">
                                     <td class="text-nowrap">{{ sprintf('%06d', $ticket->ticket_id) }}</td>
                                     <td class="text-nowrap">{{ $ticket->seat }}</td>
                                     <td class="text-nowrap">{{ $ticket->door }}</td>

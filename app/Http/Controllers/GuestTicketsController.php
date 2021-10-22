@@ -17,6 +17,6 @@ class GuestTicketsController extends Controller
             return view('errors.404');
         }
         $seat_type = SeatType::getDescription($event->seat_type);
-        return view('guest.index', ['event' => $event, 'ticket' => $ticket, 'seat_type' => $seat_type]);
+        return view('tickets.show', ['event' => $event, 'ticket' => $ticket, 'seat_type' => $seat_type]);
     }
 }
