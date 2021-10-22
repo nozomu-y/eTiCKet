@@ -42,6 +42,11 @@ use App\Libs\Common;
         @endif
         <div class="row">
             <div class="col-lg-4">
+                @if ($ticket->is_checked_in)
+                    <div class="alert alert-danger" role="alert">
+                        {{ __('message.tickets.already_used') }}
+                    </div>
+                @endif
                 <div class="d-flex justify-content-center">
                     <div class="card mb-4 ticket">
                         {!! QrCode::size(400)->generate(config('app.url') . '/' . $event->event_id . '/' . $ticket->ticket_id . '/' . $ticket->token) !!}

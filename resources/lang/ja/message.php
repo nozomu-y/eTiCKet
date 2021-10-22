@@ -18,6 +18,7 @@ return [
         'issue' => [
             'success' => 'チケットを発券しました。',
         ],
+        'already_used' => 'このチケットは使用済みです。'
     ],
     'front' => [
         'collect' => [
