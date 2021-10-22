@@ -30,6 +30,7 @@ Electronic Ticketing System developed for Concerts
 
 ## What's eTiCKet?
 eTiCKet is an electronic ticketing system developed for concerts.   
+Payment processing is not supported. 
 
 <!-- ## Demo -->
 
@@ -38,8 +39,8 @@ eTiCKet is an electronic ticketing system developed for concerts.
 ## [Installation]
 
 ## Requirements 
-* PHP >= 7.3
-* MySQL 5.7
+* PHP >= 7.2.5
+* MySQL >= 5.7 or PostgreSQL >= 9.6 or SQLite >= 3.8.8
 
 ## License
 This software is licensed under [the MIT License](https://github.com/nozomu-y/eTiCKet/blob/main/LICENSE). 
