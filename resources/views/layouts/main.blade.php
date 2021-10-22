@@ -3,28 +3,20 @@
 
 @include('common.head')
 
-<body id="page-top" class="sidebar-toggled">
+<body id="page-top">
+    @include('common.header')
     <div id="wrapper">
-        @include('common.sidebar')
-
-        <!-- content wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-            <!-- main content -->
             <div id="content">
-                @include('common.header')
                 @yield('content')
             </div>
-
             @include('common.footer')
-
         </div>
     </div>
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
+    <button type="button" class="btn btn-info btn-floating btn-back-to-top" id="btn-back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
     @include('common.script')
-
 </body>
 
 </html>

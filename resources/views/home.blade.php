@@ -23,7 +23,6 @@
                     </div>
                 @endif
                 <a class="btn btn-primary" href="{{ route('qrreader') }}">{{ __('qrreader') }}</a>
-
             </div>
         </div>
     </div>
