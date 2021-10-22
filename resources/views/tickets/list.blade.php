@@ -4,6 +4,17 @@ use App\Libs\Common;
 @extends('layouts.main')
 @section('title', __('ticket_list'))
 
+@section('style')
+    <style>
+        table tbody tr.tr-hover:hover {
+            background-color: rgba(0, 0, 0, 0.075);
+            -webkit-transition: .5s;
+            transition: .5s;
+        }
+
+    </style>
+@endsection
+
 @section('content')
     <div class="container-fluid">
         <h1 class="h3 text-gray-800 mb-4">{{ __('ticket_list') }}</h1>
@@ -34,7 +45,7 @@ use App\Libs\Common;
                     </div>
                 @endif
                 <div class="mb-3">
-                    <table class="table table-hover" id="tickets_table" style="min-width: 100%;">
+                    <table class="table" id="tickets_table" style="min-width: 100%;">
                         <thead>
                             <tr>
                                 <th class="text-nowrap">{{ __('ticket_no') }}</th>
@@ -47,14 +58,18 @@ use App\Libs\Common;
                         </thead>
                         <tbody>
                             @foreach ($tickets as $ticket)
-                                <tr
-                                    onclick="window.location='{{ route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}'">
-                                    <td class="text-nowrap">{{ sprintf('%06d', $ticket->ticket_id) }}</td>
-                                    <td class="text-nowrap">{{ $ticket->seat }}</td>
-                                    <td class="text-nowrap">{{ $ticket->door }}</td>
-                                    <td class="text-nowrap">{{ Common::format_price($ticket->price) }}</td>
-                                    <td class="text-nowrap">{{ $ticket->is_issued ? __('done') : '' }}</td>
-                                    <td class="text-nowrap">{{ $ticket->is_checked_in ? __('done') : '' }}</td>
+                                @if ($ticket->is_issued)
+                                    <tr class="tr-hover"
+                                        onclick="window.location='{{ route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}'">
+                                    @else
+                                    <tr>
+                                @endif
+                                <td class="text-nowrap">{{ sprintf('%06d', $ticket->ticket_id) }}</td>
+                                <td class="text-nowrap">{{ $ticket->seat }}</td>
+                                <td class="text-nowrap">{{ $ticket->door }}</td>
+                                <td class="text-nowrap">{{ Common::format_price($ticket->price) }}</td>
+                                <td class="text-nowrap">{{ $ticket->is_issued ? __('done') : '' }}</td>
+                                <td class="text-nowrap">{{ $ticket->is_checked_in ? __('done') : '' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
