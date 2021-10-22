@@ -48,7 +48,7 @@
                                 @endif
                                     <tr>
                                         <th class="text-nowrap pr-3">{{ __('expire_at') }}</th>
-                                        <td>{{ date('Y/m/d H;i', strtotime($event->expire_at)) }}</td>
+                                        <td>{{ date('Y/m/d H:i', strtotime($event->expire_at)) }}</td>
                                     </tr>
                             </tbody>
                         </table>
