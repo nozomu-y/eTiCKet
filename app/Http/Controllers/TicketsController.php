@@ -120,6 +120,9 @@ class TicketsController extends Controller
     {
         $event = Events::where('event_id', $event_id)->get()->first();
         $ticket = Tickets::where('event_id', $event_id)->where('ticket_id', $ticket_id)->get()->first();
+        if (!$ticket->is_issued) {
+            return view('errors.404');
+        }
         $seat_type = SeatType::getDescription($event->seat_type);
         return view('tickets.show', ['event' => $event, 'ticket' => $ticket, 'seat_type' => $seat_type]);
     }
