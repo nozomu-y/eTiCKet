@@ -1,5 +1,5 @@
 <?php
-    use App\Libs\Common;
+use App\Libs\Common;
 ?>
 @extends('layouts.main')
 @section('title', __('issue_tickets_abbrev'))
@@ -35,38 +35,67 @@
                 @endif
                 <form method="POST" action="{{ route('post_issue_tickets', ['event_id' => $event->event_id]) }}">
                     @csrf
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>{{ __('ticket_no') }}</th>
-                                <th>{{ __('seat_no') }}</th>
-                                <th>{{ __('door_no') }}</th>
-                                <th>{{ __('price') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($tickets as $ticket)
-                                @if (!$ticket->is_issued)
+                    <div class="mb-3">
+                        <table class="table" id="tickets_table" style="min-width: 100%;">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox"
-                                                name="check_{{ $ticket->ticket_id }}" value="1">
-                                        </div>
-                                    </td>
-                                    <td>{{ sprintf('%06d', $ticket->ticket_id) }}</td>
-                                    <td>{{ $ticket->seat }}</td>
-                                    <td>{{ $ticket->door }}</td>
-                                    <td>{{ Common::format_price($ticket->price) }}</td>
+                                    <th></th>
+                                    <th class="text-nowrap">{{ __('ticket_no') }}</th>
+                                    <th class="text-nowrap">{{ __('seat_no') }}</th>
+                                    <th class="text-nowrap">{{ __('door_no') }}</th>
+                                    <th class="text-nowrap">{{ __('price') }}</th>
                                 </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($tickets as $ticket)
+                                    @if (!$ticket->is_issued)
+                                        <tr>
+                                            <td>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="check_{{ $ticket->ticket_id }}" value="1">
+                                                </div>
+                                            </td>
+                                            <td class="text-nowrap">{{ sprintf('%06d', $ticket->ticket_id) }}</td>
+                                            <td class="text-nowrap">{{ $ticket->seat }}</td>
+                                            <td class="text-nowrap">{{ $ticket->door }}</td>
+                                            <td class="text-nowrap">{{ Common::format_price($ticket->price) }}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                     <button type="submit" class="btn btn-primary">{{ __('issue_tickets_abbrev') }}</button>
                 </form>
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    <script>
+        $(document).ready(function() {
+            $('#tickets_table').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Japanese.json"
+                },
+                "order": [], // don't order on init
+                "lengthMenu": [
+                    [25, 50, 100, -1],
+                    [25, 50, 100, "全件"]
+                ],
+                "columnDefs": [{
+                    type: "currency",
+                    targets: 4
+                }],
+                "deferRender": false,
+                "autowidth": false,
+                "scrollX": true,
+                "dom": "<\'row\'<\'col-sm-6\'l><\'col-sm-6 right\'f>>" +
+                    "<\'row\'<\'col-sm-12 mb-2\'tr>>" +
+                    "<\'row\'<\'col-sm-6\'i><\'col-sm-6\'p>>",
+            });
+        });
+    </script>
 @endsection
