@@ -18,23 +18,40 @@
                     </div>
                     <div class="card-body">
                         <h4>{{ $event->name }}</h4>
-                        <p>
-                            {{ $event->date }} @ {{ $event->place }}
-                            @if ($event->open_at != null)
-                                <br>
-                                {{ __('open_at_abbrev') }}：{{ $event->open_at }}
-                            @endif
-                            @if ($event->start_at != null)
-                                <br>
-                                {{ __('start_at_abbrev') }}：{{ $event->start_at }}
-                            @endif
-                            @if ($event->end_at != null)
-                                <br>
-                                {{ __('end_at_abbrev') }}：{{ $event->end_at }}
-                            @endif
-                            <br>
-                            {{ __('expire_at') }}：{{ $event->expire_at }}
-                        </p>
+                        <table class="mt-2">
+                            <tbody>
+                                <tr>
+                                    <th class="text-nowrap pr-3">{{ __('date') }}</th>
+                                    <td>{{ date('Y/m/d', strtotime($event->date)) }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-nowrap pr-3">{{ __('hall') }}</th>
+                                    <td>{{ $event->place }}</td>
+                                </tr>
+                                @if ($event->open_at != null)
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('open_at_abbrev') }}</th>
+                                        <td>{{ date('H:i', strtotime($event->open_at)) }}</td>
+                                    </tr>
+                                @endif
+                                @if ($event->start_at != null)
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('start_at_abbrev') }}</th>
+                                        <td>{{ date('H:i', strtotime($event->start_at)) }}</td>
+                                    </tr>
+                                @endif
+                                @if ($event->end_at != null)
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('end_at_abbrev') }}</th>
+                                        <td>{{ date('H:i', strtotime($event->end_at)) }}</td>
+                                    </tr>
+                                @endif
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('expire_at') }}</th>
+                                        <td>{{ date('Y/m/d H;i', strtotime($event->expire_at)) }}</td>
+                                    </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -51,8 +68,8 @@
                     <a class="list-group-item list-group-item-action">{{ __('edit_event') }}</a>
                     <a class="list-group-item list-group-item-action text-danger"
                         onclick="if (confirm('{{ __('message.events.delete.confirm') }}')) {event.preventDefault(); document.getElementById('delete-form').submit();}">{{ __('delete_event') }}</a>
-                    <form id="delete-form" action="{{ route('delete_event', ['event_id' => $event->event_id]) }}" method="POST"
-                        class="d-none">
+                    <form id="delete-form" action="{{ route('delete_event', ['event_id' => $event->event_id]) }}"
+                        method="POST" class="d-none">
                         @csrf
                     </form>
                 </div>
