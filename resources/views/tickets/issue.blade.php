@@ -1,3 +1,6 @@
+<?php
+    use App\Libs\Common;
+?>
 @extends('layouts.main')
 @section('title', __('issue_tickets_abbrev'))
 
@@ -52,10 +55,10 @@
                                                 name="check_{{ $ticket->ticket_id }}" value="1">
                                         </div>
                                     </td>
-                                    <td>{{ $ticket->ticket_id }}</td>
+                                    <td>{{ sprintf('%06d', $ticket->ticket_id) }}</td>
                                     <td>{{ $ticket->seat }}</td>
                                     <td>{{ $ticket->door }}</td>
-                                    <td>{{ $ticket->price }}</td>
+                                    <td>{{ Common::format_price($ticket->price) }}</td>
                                 </tr>
                                 @endif
                             @endforeach

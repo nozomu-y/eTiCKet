@@ -1,3 +1,6 @@
+<?php
+use App\Libs\Common;
+?>
 @extends('layouts.main')
 @section('title', __('ticket_list'))
 
@@ -36,17 +39,19 @@
                             <th>{{ __('seat_no') }}</th>
                             <th>{{ __('door_no') }}</th>
                             <th>{{ __('price') }}</th>
-                            <th>{{ __('status') }}</th>
+                            <th>{{ __('issue') }}</th>
+                            <th>{{ __('check_in') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($tickets as $ticket)
                             <tr>
-                                <td>{{ $ticket->ticket_id }}</td>
+                                <td>{{ sprintf('%06d', $ticket->ticket_id) }}</td>
                                 <td>{{ $ticket->seat }}</td>
                                 <td>{{ $ticket->door }}</td>
-                                <td>{{ $ticket->price }}</td>
-                                <td>{{ $ticket->is_issued ? __('issued') : "" }}</td>
+                                <td>{{ Common::format_price($ticket->price) }}</td>
+                                <td>{{ $ticket->is_issued ? __('done') : "" }}</td>
+                                <td>{{ $ticket->is_checked_in ? __('done') : "" }}</td>
                             </tr>
                         @endforeach
                     </tbody>

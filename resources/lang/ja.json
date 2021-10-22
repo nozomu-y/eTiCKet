@@ -42,7 +42,7 @@
     "ticket_no": "チケット番号",
     "seat_no": "座席番号",
     "door_no": "ドア番号",
-    "price": "値段",
+    "price": "価格",
     "status": "状況",
 
     "reserved": "指定席",
@@ -53,6 +53,10 @@
     "go_back": "戻る",
     "go_home": "ホームに戻る",
     "scan_more": "追加で読み取る",
+    "check_in": "入場",
+    "issue": "発券",
+    "done": "済",
+    "free": "無料",
     
     "qrreader": "QRコード読み取り",
     
