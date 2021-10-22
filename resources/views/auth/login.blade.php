@@ -8,7 +8,8 @@
 @section('content')
     <div class="p-5">
         <div class="text-center">
-            <h1 class="h3 text-gray-900 mb-4">{{ config('app.name') }}</h1>
+            <h1 class="h3 text-gray-900 mb-1">{{ config('app.name') }}</h1>
+            <h2 class="h5 text-gray-900 mb-4">{{ __('administrator_login') }}</h2>
         </div>
 
         {{ Form::open(['url' => 'login', 'method' => 'post']) }}
