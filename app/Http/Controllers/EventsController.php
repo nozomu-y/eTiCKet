@@ -30,7 +30,7 @@ class EventsController extends Controller
 
     function add(Request $request)
     {
-        $validator = $this->validator($request->all());
+        $validator = $this->add_validator($request->all());
         $validator->validate();
 
         $event = new Events();
@@ -50,7 +50,37 @@ class EventsController extends Controller
         $event->seat_type = $request['seat_type'];
         $event->save();
 
-        return redirect()->route('events');
+        return redirect()->route('events')->with('success', __('message.events.add.success'));
+    }
+
+    function edit($event_id)
+    {
+        $event = Events::where('event_id', $event_id)->get()->first();
+        return view('events.edit', ['event' => $event]);
+    }
+
+    function post_edit(Request $request, $event_id)
+    {
+        $validator = $this->edit_validator($request->all());
+        $validator->validate();
+
+        $event = Events::where('event_id', $event_id)->get()->first();
+        $event->name = $request['event_name'];
+        $event->place = $request['place'];
+        $event->date = $request['date'];
+        if ($request['open_at'] != null) {
+            $event->open_at = $request['open_at'];
+        }
+        if ($request['start_at'] != null) {
+            $event->start_at = $request['start_at'];
+        }
+        if ($request['end_at'] != null) {
+            $event->end_at = $request['end_at'];
+        }
+        $event->expire_at = $request['expire_at'];
+        $event->save();
+
+        return redirect()->route('event_detail', ['event_id' => $event->event_id])->with('success', __('message.events.edit.success'));
     }
 
     /**
@@ -59,7 +89,7 @@ class EventsController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function add_validator(array $data)
     {
         return Validator::make($data, [
             'event_name' => ['required', 'string', 'max:255'],
@@ -73,15 +103,31 @@ class EventsController extends Controller
         ]);
     }
 
+    protected function edit_validator(array $data)
+    {
+        return Validator::make($data, [
+            'event_name' => ['required', 'string', 'max:255'],
+            'place' => ['required', 'string', 'max:255'],
+            'date' => ['required', 'date'],
+            'open_at' => ['date_format:H:i', 'nullable'],
+            'start_at' => ['date_format:H:i', 'nullable'],
+            'end_at' => ['date_format:H:i', 'nullable'],
+            'expire_at' => ['required', 'date_format:Y-m-d\TH:i'],
+        ]);
+    }
+
     function delete($id)
     {
         $result = Events::where('event_id', $id)->delete();
         if (!$result) {
             return redirect()->route('events')->with('error', __('message.events.delete.error'));
         }
-        $result = Tickets::where('event_id', $id)->delete();
-        if (!$result) {
-            return redirect()->route('events')->with('error', __('message.events.delete.error'));
+        $num = Tickets::where('event_id', $id)->count();
+        if ($num !== 0) {
+            $result = Tickets::where('event_id', $id)->delete();
+            if (!$result) {
+                return redirect()->route('events')->with('error', __('message.events.delete.error'));
+            }
         }
         return redirect()->route('events')->with('success', __('message.events.delete.success'));
     }

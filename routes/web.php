@@ -40,9 +40,11 @@ Route::post('account_setting/change_password', [AccountSettingController::class,
 
 Route::get('events', [EventsController::class, 'index'])->name('events');
 Route::get('events/{event_id}', [EventsController::class, 'detail'])->where('event_id', '[0-9]+')->name('event_detail');
-Route::get('events/add', function() { return view('events.add'); })->name('add_event');
+Route::get('events/add', function () { return view('events.add'); })->name('add_event');
 Route::post('events/add', [EventsController::class, 'add'])->name('post_add_event');
-Route::post('events/delete/{event_id}', [EventsController::class, 'delete'])->where('event_id', '[0-9]+')->name('delete_event');
+Route::get('events/{event_id}/edit', [EventsController::class, 'edit'])->where('event_id', '[0-9]+')->name('edit_event');
+Route::post('events/{event_id}/edit', [EventsController::class, 'post_edit'])->where('event_id', '[0-9]+')->name('post_edit_event');
+Route::post('events/{event_id}/delete', [EventsController::class, 'delete'])->where('event_id', '[0-9]+')->name('delete_event');
 Route::get('events/{event_id}/tickets', [TicketsController::class, 'index'])->where('event_id', '[0-9]+')->name('tickets');
 Route::get('events/{event_id}/tickets/add', [TicketsController::class, 'add'])->where('event_id', '[0-9]+')->name('add_tickets');
 Route::post('events/{event_id}/tickets/add', [TicketsController::class, 'post_add'])->where('event_id', '[0-9]+')->name('post_add_tickets');
@@ -53,9 +55,7 @@ Route::get('events/{event_id}/tickets/{ticket_id}', [TicketsController::class, '
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('accounts', [AccountsController::class, 'index'])->name('accounts');
-    Route::get('accounts/add', function() {
-        return view('accounts.add');
-    })->name('add_account');
+    Route::get('accounts/add', function () { return view('accounts.add'); })->name('add_account');
     Route::post('accounts/add', [AccountsController::class, 'register'])->name('post_add_account');
 });
 

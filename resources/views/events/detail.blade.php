@@ -14,6 +14,22 @@ use App\Enums\SeatType;
     </nav>
     <div class="row">
         <div class="col-lg-4">
+            @if (session('error'))
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="card mb-4">
                 <div class="card-body">
                     <h3 class="h5">{{ $event->name }}</h3>
@@ -68,7 +84,8 @@ use App\Enums\SeatType;
                     href="{{ route('add_tickets', ['event_id' => $event->event_id]) }}">{{ __('add_tickets') }}</a>
                 <a class="list-group-item list-group-item-action"
                     href="{{ route('issue_tickets', ['event_id' => $event->event_id]) }}">{{ __('issue_tickets') }}</a>
-                <a class="list-group-item list-group-item-action">{{ __('edit_event') }}</a>
+                <a class="list-group-item list-group-item-action"
+                   href="{{ route('edit_event', ['event_id' => $event->event_id]) }}">{{ __('edit_event') }}</a>
                 <a class="list-group-item list-group-item-action text-danger"
                     onclick="if (confirm('{{ __('message.events.delete.confirm') }}')) {event.preventDefault(); document.getElementById('delete-form').submit();}">{{ __('delete_event') }}</a>
                 <form id="delete-form" action="{{ route('delete_event', ['event_id' => $event->event_id]) }}"
