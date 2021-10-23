@@ -139,7 +139,7 @@ use App\Libs\Common;
             </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-4 mb-3">
             @if (url()->current() === route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]))
                 <div class="card">
                     <div class="card-header">{{ __('memo') }} </div>
