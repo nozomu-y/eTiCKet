@@ -43,25 +43,17 @@ class AccountsController extends Controller
         $this->middleware('admin');
     }
 
-    /**
-     * Handle a registration request for the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
-     */
-    public function register(Request $request)
-    {
-        $this->validator($request->all())->validate();
+    public function register(Request $request) {
+        $validator = $this->validator($request->all());
+        $validator->validate();
 
-        event(new Registered($user = $this->create($request->all())));
-
-        if ($response = $this->registered($request, $user)) {
-            return $response;
-        }
-
-        return $request->wantsJson()
-            ? new JsonResponse([], 201)
-            : redirect($this->redirectPath());
+        $user = new User();
+        $user->name = $request['name'];
+        $user->username = $request['username'];
+        $user->password = Hash::make(config('app.default_user_password'));
+        $user->role = 'member';
+        $user->save();
+        return redirect()->route('accounts')->with('success', __('message.accounts.add.success'));
     }
 
     /**
@@ -75,23 +67,6 @@ class AccountsController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'username' => $data['username'],
-            'password' => Hash::make($data['password']),
-            'role' => 'member',
         ]);
     }
 

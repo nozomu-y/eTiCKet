@@ -230,5 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-    'corporation_name'  => env('CORPORATION_NAME', '団体名')
+    'corporation_name'  => env('CORPORATION_NAME', '団体名'),
+    'default_admin_password' => env('DEFAULT_ADMIN_PASSWORD', 'Admin123'),
+    'default_user_password' => env('DEFAULT_USER_PASSWORD', 'User123'),
 ];
