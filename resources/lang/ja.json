@@ -42,6 +42,8 @@
     "issue_tickets_abbrev": "チケット発券",
     "confirm": "確認",
     "issued": "発券済み",
+    "ticket_memo": "メモ（任意）",
+    "memo": "メモ",
     "ticket_no": "チケット番号",
     "seat_no": "座席番号",
     "door_no": "ドア番号",

@@ -122,6 +122,7 @@ class TicketsController extends Controller
     function post_issue(Request $request, $event_id)
     {
         $event = Events::where('event_id', $event_id)->get()->first();
+        $memo = $request['memo'];
         $data = array();
         foreach ($request->all() as $key => $value) {
             if (strpos($key, 'check') === false) {
@@ -134,6 +135,7 @@ class TicketsController extends Controller
             $ticket = Tickets::where('event_id', $event->event_id)->where('ticket_id', $ticket_id)->get()->first();
             $ticket->token = Str::random(32);
             $ticket->is_issued = 1;
+            $ticket->memo = $memo;
             $ticket->save();
             $data[] = array($ticket->ticket_id, $ticket->token);
         }

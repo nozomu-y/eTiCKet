@@ -18,6 +18,7 @@ return [
         'issue' => [
             'success' => 'チケットを発券しました。',
             'confirm' => '以下の内容でチケットを発券します。',
+            'memo_placeholder' => '配布相手・配布担当者のメモなど',
         ],
         'already_used' => 'このチケットは使用済みです。'
     ],
