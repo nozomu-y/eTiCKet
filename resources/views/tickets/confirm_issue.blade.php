@@ -11,7 +11,9 @@ use App\Libs\Common;
             <li class="breadcrumb-item"><a href="{{ route('events') }}">{{ __('event_list') }}</a></li>
             <li class="breadcrumb-item"><a
                     href="{{ route('event_detail', ['event_id' => $event->event_id]) }}">{{ $event->name }}</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('issue_tickets', ['event_id' => $event->event_id]) }}">{{ __('issue_tickets_abbrev') }}</a></li>
+            <li class="breadcrumb-item"><a
+                    href="{{ route('issue_tickets', ['event_id' => $event->event_id]) }}">{{ __('issue_tickets_abbrev') }}</a>
+            </li>
             <li class="breadcrumb-item active" aria-current="page">{{ __('confirm') }}</li>
         </ol>
     </nav>
@@ -62,6 +64,11 @@ use App\Libs\Common;
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="form-group">
+                    <label for="memo">{{ __('ticket_memo') }}</label>
+                    <input id="memo" type="text" class="form-control" name="memo" value="{{ old('memo') }}"
+                        placeholder="{{ __('message.tickets.issue.memo_placeholder') }}">
                 </div>
                 <button type="submit" class="btn btn-primary">{{ __('issue_tickets_abbrev') }}</button>
             </form>

@@ -24,7 +24,7 @@ use App\Libs\Common;
 @endsection
 
 @section('content')
-    @if (url()->previous() === route('tickets', ['event_id' => $event->event_id]))
+    @if (url()->current() === route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]))
         <h1 class="h3 text-gray-800 mb-4">{{ __('ticket_detail') }}</h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -137,6 +137,17 @@ use App\Libs\Common;
                         class="text-break">{{ config('app.url') . '/' . $event->event_id . '/' . $ticket->ticket_id . '/' . $ticket->token }}</a>
                 </p>
             </div>
+        </div>
+
+        <div class="col-lg-4">
+            @if (url()->current() === route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]))
+                <div class="card">
+                    <div class="card-header">{{ __('memo') }} </div>
+                    <div class="card-body">
+                        {{ $ticket->memo }}
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
