@@ -6,7 +6,7 @@
 <body class="bg-gradient-primary">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="col-lg-6 col-md-9">
                 @yield('content')
             </div>
         </div>

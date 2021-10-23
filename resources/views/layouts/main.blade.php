@@ -8,7 +8,9 @@
     <div id="wrapper">
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                @yield('content')
+                <div class="container">
+                    @yield('content')
+                </div>
             </div>
             @include('common.footer')
         </div>
