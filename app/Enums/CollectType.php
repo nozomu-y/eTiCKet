@@ -18,26 +18,26 @@ final class CollectType extends Enum
     public static function getDescription($value): string
     {
         if ($value == self::DISABLED) {
-            return __('disabled');
+            return __('collection_disabled');
         }
         if ($value == self::OPTIONAL) {
-            return __('optional');
+            return __('collection_optional');
         }
         if ($value == self::REQUIRED) {
-            return __('required');
+            return __('collection_required');
         }
         return parent::getDescription($value);
     }
 
     public static function getValue(string $key)
     {
-        if ($key == __('disabled')) {
+        if ($key == __('collection_disabled')) {
             return self::DISABLED;
         }
-        if ($key == __('optional')) {
+        if ($key == __('collection_optional')) {
             return self::OPTIONAL;
         }
-        if ($key == __('required')) {
+        if ($key == __('collection_required')) {
             return self::REQUIRED;
         }
         return parent::getValue($key);

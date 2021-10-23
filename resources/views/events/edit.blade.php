@@ -1,5 +1,6 @@
 <?php
 use App\Enums\SeatType;
+use App\Enums\CollectType;
 ?>
 @extends('layouts.main')
 @section('title', __('edit_event'))
@@ -128,6 +129,69 @@ use App\Enums\SeatType;
                                     <option value="{{ SeatType::UNRESERVED }}" {{ $event->seat_type == SeatType::UNRESERVED ? "selected": "" }}>{{ __('unreserved') }}</option>
                                 </select>
                                 @error('seat_type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <hr>
+                        <h3 class="h5">{{ __('collect_personal_information') }}</h3>
+                        <p>
+                        {{__('message.events.add.collect_personal_information')}}
+                        </p>
+
+                        <div class="form-group row">
+                            <label for="seat_type"
+                                class="col-md-4 col-form-label text-md-right">{{ __('name') }}</label>
+                            <div class="col-md-6">
+                                <select name="collect_name" id="collect_name"
+                                    class="form-control @error('collect_name') is-invalid @enderror"
+                                    value="{{ old('collect_name') }}" required>
+                                    <option value="{{ CollectType::DISABLED }}" {{ $event->collect_name == CollectType::DISABLED ? "selected" : "" }}>{{ __('collection_disabled') }}</option>
+                                    <option value="{{ CollectType::OPTIONAL }}" {{ $event->collect_name == CollectType::OPTIONAL ? "selected" : "" }}>{{ __('collection_optional') }}</option>
+                                    <option value="{{ CollectType::REQUIRED }}" {{ $event->collect_name == CollectType::REQUIRED ? "selected" : "" }}>{{ __('collection_required') }}</option>
+                                </select>
+                                @error('collect_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="seat_type"
+                                class="col-md-4 col-form-label text-md-right">{{ __('email') }}</label>
+                            <div class="col-md-6">
+                                <select name="collect_email" id="collect_email"
+                                    class="form-control @error('collect_email') is-invalid @enderror"
+                                    value="{{ old('collect_email') }}" required>
+                                    <option value="{{ CollectType::DISABLED }}" {{ $event->collect_email == CollectType::DISABLED ? "selected" : "" }}>{{ __('collection_disabled') }}</option>
+                                    <option value="{{ CollectType::OPTIONAL }}" {{ $event->collect_email == CollectType::OPTIONAL ? "selected" : "" }}>{{ __('collection_optional') }}</option>
+                                    <option value="{{ CollectType::REQUIRED }}" {{ $event->collect_email == CollectType::REQUIRED ? "selected" : "" }}>{{ __('collection_required') }}</option>
+                                </select>
+                                @error('collect_email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="seat_type"
+                                class="col-md-4 col-form-label text-md-right">{{ __('phone_number') }}</label>
+                            <div class="col-md-6">
+                                <select name="collect_phone_number" id="collect_phone_number"
+                                    class="form-control @error('collect_phone_number') is-invalid @enderror"
+                                    value="{{ old('collect_phone_number') }}" required>
+                                    <option value="{{ CollectType::DISABLED }}" {{ $event->collect_phone_number == CollectType::DISABLED ? "selected" : "" }}>{{ __('collection_disabled') }}</option>
+                                    <option value="{{ CollectType::OPTIONAL }}" {{ $event->collect_phone_number == CollectType::OPTIONAL ? "selected" : "" }}>{{ __('collection_optional') }}</option>
+                                    <option value="{{ CollectType::REQUIRED }}" {{ $event->collect_phone_number == CollectType::REQUIRED ? "selected" : "" }}>{{ __('collection_required') }}</option>
+                                </select>
+                                @error('collect_phone_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
