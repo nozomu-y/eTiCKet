@@ -13,68 +13,72 @@ use App\Enums\SeatType;
         </ol>
     </nav>
     <div class="row">
-        <div class="col-lg-4">
-            @if (session('error'))
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    {{ session('error') }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-12">
+                    @if (session('error'))
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                 </div>
-            @endif
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h3 class="h5">{{ $event->name }}</h3>
-                    <table class="mt-2">
-                        <tbody>
-                            <tr>
-                                <th class="text-nowrap pr-3">{{ __('date') }}</th>
-                                <td>{{ date('Y/m/d', strtotime($event->date)) }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-nowrap pr-3">{{ __('hall') }}</th>
-                                <td>{{ $event->place }}</td>
-                            </tr>
-                            @if ($event->open_at != null)
-                                <tr>
-                                    <th class="text-nowrap pr-3">{{ __('open_at_abbrev') }}</th>
-                                    <td>{{ date('H:i', strtotime($event->open_at)) }}</td>
-                                </tr>
-                            @endif
-                            @if ($event->start_at != null)
-                                <tr>
-                                    <th class="text-nowrap pr-3">{{ __('start_at_abbrev') }}</th>
-                                    <td>{{ date('H:i', strtotime($event->start_at)) }}</td>
-                                </tr>
-                            @endif
-                            @if ($event->end_at != null)
-                                <tr>
-                                    <th class="text-nowrap pr-3">{{ __('end_at_abbrev') }}</th>
-                                    <td>{{ date('H:i', strtotime($event->end_at)) }}</td>
-                                </tr>
-                            @endif
-                            <tr>
-                                <th class="text-nowrap pr-3">{{ __('expire_at') }}</th>
-                                <td>{{ date('Y/m/d H:i', strtotime($event->expire_at)) }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-nowrap pr-3">{{ __('seat_type') }}</th>
-                                <td>{{ SeatType::getDescription($event->seat_type) }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3 class="h5">{{ $event->name }}</h3>
+                            <table class="mt-2">
+                                <tbody>
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('date') }}</th>
+                                        <td>{{ date('Y/m/d', strtotime($event->date)) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('hall') }}</th>
+                                        <td>{{ $event->place }}</td>
+                                    </tr>
+                                    @if ($event->open_at != null)
+                                        <tr>
+                                            <th class="text-nowrap pr-3">{{ __('open_at_abbrev') }}</th>
+                                            <td>{{ date('H:i', strtotime($event->open_at)) }}</td>
+                                        </tr>
+                                    @endif
+                                    @if ($event->start_at != null)
+                                        <tr>
+                                            <th class="text-nowrap pr-3">{{ __('start_at_abbrev') }}</th>
+                                            <td>{{ date('H:i', strtotime($event->start_at)) }}</td>
+                                        </tr>
+                                    @endif
+                                    @if ($event->end_at != null)
+                                        <tr>
+                                            <th class="text-nowrap pr-3">{{ __('end_at_abbrev') }}</th>
+                                            <td>{{ date('H:i', strtotime($event->end_at)) }}</td>
+                                        </tr>
+                                    @endif
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('expire_at') }}</th>
+                                        <td>{{ date('Y/m/d H:i', strtotime($event->expire_at)) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('seat_type') }}</th>
+                                        <td>{{ SeatType::getDescription($event->seat_type) }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4">
         </div>
         <div class="col-lg-4">
             <div class="list-group mb-4">
@@ -85,7 +89,7 @@ use App\Enums\SeatType;
                 <a class="list-group-item list-group-item-action"
                     href="{{ route('issue_tickets', ['event_id' => $event->event_id]) }}">{{ __('issue_tickets') }}</a>
                 <a class="list-group-item list-group-item-action"
-                   href="{{ route('edit_event', ['event_id' => $event->event_id]) }}">{{ __('edit_event') }}</a>
+                    href="{{ route('edit_event', ['event_id' => $event->event_id]) }}">{{ __('edit_event') }}</a>
                 <a class="list-group-item list-group-item-action text-danger"
                     onclick="if (confirm('{{ __('message.events.delete.confirm') }}')) {event.preventDefault(); document.getElementById('delete-form').submit();}">{{ __('delete_event') }}</a>
                 <form id="delete-form" action="{{ route('delete_event', ['event_id' => $event->event_id]) }}"

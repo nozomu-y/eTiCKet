@@ -13,10 +13,11 @@ return [
             'error' => 'イベントの削除に失敗しました。',
         ],
         'add' => [
-            'success' => 'イベントを追加しました。'
+            'success' => 'イベントを追加しました。',
+            'collect_personal_information' => '観客の個人情報を収集する場合は以下で指定してください。',
         ],
         'edit' => [
-            'success' => 'イベントを編集しました。'
+            'success' => 'イベントを編集しました。',
         ],
     ],
     'tickets' => [

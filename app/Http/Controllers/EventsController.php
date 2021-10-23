@@ -48,6 +48,9 @@ class EventsController extends Controller
         }
         $event->expire_at = $request['expire_at'];
         $event->seat_type = $request['seat_type'];
+        $event->collect_name = $request['collect_name'];
+        $event->collect_email = $request['collect_email'];
+        $event->collect_phone_number = $request['collect_phone_number'];
         $event->save();
 
         return redirect()->route('events')->with('success', __('message.events.add.success'));
@@ -78,6 +81,9 @@ class EventsController extends Controller
             $event->end_at = $request['end_at'];
         }
         $event->expire_at = $request['expire_at'];
+        $event->collect_name = $request['collect_name'];
+        $event->collect_email = $request['collect_email'];
+        $event->collect_phone_number = $request['collect_phone_number'];
         $event->save();
 
         return redirect()->route('event_detail', ['event_id' => $event->event_id])->with('success', __('message.events.edit.success'));
@@ -100,6 +106,9 @@ class EventsController extends Controller
             'end_at' => ['date_format:H:i', 'nullable'],
             'expire_at' => ['required', 'date_format:Y-m-d\TH:i'],
             'seat_type' => ['required'],
+            'collect_name' => ['required'],
+            'collect_email' => ['required'],
+            'collect_phone_number' => ['required'],
         ]);
     }
 
@@ -113,6 +122,9 @@ class EventsController extends Controller
             'start_at' => ['date_format:H:i', 'nullable'],
             'end_at' => ['date_format:H:i', 'nullable'],
             'expire_at' => ['required', 'date_format:Y-m-d\TH:i'],
+            'collect_name' => ['required'],
+            'collect_email' => ['required'],
+            'collect_phone_number' => ['required'],
         ]);
     }
 

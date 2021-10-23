@@ -9,6 +9,8 @@
     "change": "変更",
     "edit": "編集",
     "name": "名前",
+    "email": "メールアドレス",
+    "phone_number": "電話番号",
     "username": "ユーザー名",
     "password": "パスワード",
     "current_password": "現在のパスワード",
@@ -76,6 +78,11 @@
     
     "qrreader": "QRコード読み取り",
     "logout": "ログアウト",
+
+    "collect_personal_information": "個人情報収集",
+    "collection_disabled": "収集しない",
+    "collection_optional": "任意",
+    "collection_required": "必須",
     
     "EOF": "EOF"
 }
