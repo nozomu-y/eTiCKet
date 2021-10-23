@@ -11,19 +11,17 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
-        <h1 class="h3 text-gray-800 mb-4">{{ __('qrreader') }}</h1>
-        <div class="row">
-            <div class="col-12">
-                <section id="qrreader">
-                    <video id="camera" muted autoplay playsinline></video>
-                    <canvas id="picture" hidden></canvas>
-                </section>
-                <form action="{{ route('post_qrreader') }}" method="POST" name="QRPost">
-                    @csrf
-                    <input type="hidden" name="data" value="" />
-                </form>
-            </div>
+    <h1 class="h3 text-gray-800 mb-4">{{ __('qrreader') }}</h1>
+    <div class="row">
+        <div class="col-12">
+            <section id="qrreader">
+                <video id="camera" muted autoplay playsinline></video>
+                <canvas id="picture" hidden></canvas>
+            </section>
+            <form action="{{ route('post_qrreader') }}" method="POST" name="QRPost">
+                @csrf
+                <input type="hidden" name="data" value="" />
+            </form>
         </div>
     </div>
 @endsection
