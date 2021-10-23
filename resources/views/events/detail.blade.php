@@ -1,5 +1,6 @@
 <?php
 use App\Enums\SeatType;
+use App\Enums\CollectType;
 ?>
 @extends('layouts.main')
 @section('title', $event->name)
@@ -72,6 +73,24 @@ use App\Enums\SeatType;
                                     <tr>
                                         <th class="text-nowrap pr-3">{{ __('seat_type') }}</th>
                                         <td>{{ SeatType::getDescription($event->seat_type) }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr>
+                            <h4 class="h6">{{ __('collect_personal_information') }}</h4>
+                            <table class="mt-2">
+                                <tbody>
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('name') }}</th>
+                                        <td>{{ CollectType::getDescription($event->collect_name) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('email') }}</th>
+                                        <td>{{ CollectType::getDescription($event->collect_email) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('phone_number') }}</th>
+                                        <td>{{ CollectType::getDescription($event->collect_phone_number) }}</td>
                                     </tr>
                                 </tbody>
                             </table>
