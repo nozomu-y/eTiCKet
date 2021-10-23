@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'accounts' => [
+        'add' => [
+            'success' => 'アカウントを追加しました。',
+        ],
+    ],
     'events' => [
         'delete' => [
             'confirm' => 'このイベントを削除しますか？関連する全てのデータが削除されます。',
