@@ -95,6 +95,30 @@ class TicketsController extends Controller
         );
     }
 
+    function post_confirm_issue(Request $request, $event_id)
+    {
+        $event = Events::where('event_id', $event_id)->get()->first();
+        $data = array();
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'check') === false) {
+                continue;
+            }
+            if ($value != 1) {
+                continue;
+            }
+            $ticket_id = (int)explode("_", $key)[1];
+            $ticket = Tickets::where('event_id', $event->event_id)->where('ticket_id', $ticket_id)->get()->first();
+            $ticket->all();
+            $data[] = array(
+                'ticket_id' => $ticket->ticket_id,
+                'seat' => $ticket->seat,
+                'door' => $ticket->door,
+                'price' => $ticket->price
+            );
+        }
+        return view('tickets.confirm_issue', ['data' => $data, 'event' => $event]);
+    }
+
     function post_issue(Request $request, $event_id)
     {
         $event = Events::where('event_id', $event_id)->get()->first();
@@ -127,4 +151,3 @@ class TicketsController extends Controller
         return view('tickets.show', ['event' => $event, 'ticket' => $ticket, 'seat_type' => $seat_type]);
     }
 }
-

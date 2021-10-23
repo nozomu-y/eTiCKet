@@ -11,7 +11,8 @@ use App\Libs\Common;
             <li class="breadcrumb-item"><a href="{{ route('events') }}">{{ __('event_list') }}</a></li>
             <li class="breadcrumb-item"><a
                     href="{{ route('event_detail', ['event_id' => $event->event_id]) }}">{{ $event->name }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ __('issue_tickets_abbrev') }}</li>
+            <li class="breadcrumb-item"><a href="{{ route('issue_tickets', ['event_id' => $event->event_id]) }}">{{ __('issue_tickets_abbrev') }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ __('confirm') }}</li>
         </ol>
     </nav>
     <div class="row">
@@ -32,13 +33,15 @@ use App\Libs\Common;
                     </button>
                 </div>
             @endif
-            <form method="POST" action="{{ route('post_confirm_issue_tickets', ['event_id' => $event->event_id]) }}">
+            <div class="alert alert-info" role="alert">
+                {{ __('message.tickets.issue.confirm') }}
+            </div>
+            <form method="POST" action="{{ route('post_issue_tickets', ['event_id' => $event->event_id]) }}">
                 @csrf
                 <div class="mb-3">
                     <table class="table" id="tickets_table" style="min-width: 100%;">
                         <thead>
                             <tr>
-                                <th></th>
                                 <th class="text-nowrap">{{ __('ticket_no') }}</th>
                                 <th class="text-nowrap">{{ __('seat_no') }}</th>
                                 <th class="text-nowrap">{{ __('door_no') }}</th>
@@ -46,21 +49,16 @@ use App\Libs\Common;
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tickets as $ticket)
-                                @if (!$ticket->is_issued)
-                                    <tr>
-                                        <td>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox"
-                                                    name="check_{{ $ticket->ticket_id }}" value="1">
-                                            </div>
-                                        </td>
-                                        <td class="text-nowrap">{{ sprintf('%06d', $ticket->ticket_id) }}</td>
-                                        <td class="text-nowrap">{{ $ticket->seat }}</td>
-                                        <td class="text-nowrap">{{ $ticket->door }}</td>
-                                        <td class="text-nowrap">{{ Common::format_price($ticket->price) }}</td>
-                                    </tr>
-                                @endif
+                            @foreach ($data as $ticket)
+                                <tr>
+                                    <td class="text-nowrap">
+                                        {{ sprintf('%06d', $ticket['ticket_id']) }}
+                                        <input type="hidden" name="check_{{ $ticket['ticket_id'] }}" value="1"></input>
+                                    </td>
+                                    <td class="text-nowrap">{{ $ticket['seat'] }}</td>
+                                    <td class="text-nowrap">{{ $ticket['door'] }}</td>
+                                    <td class="text-nowrap">{{ Common::format_price($ticket['price']) }}</td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -84,11 +82,8 @@ use App\Libs\Common;
                     [10, 25, 50, 100, "全件"]
                 ],
                 "columnDefs": [{
-                    orderable: false,
-                    targets: 0
-                }, {
                     type: "currency",
-                    targets: 4
+                    targets: 3
                 }],
                 "deferRender": false,
                 "autowidth": false,
@@ -99,7 +94,7 @@ use App\Libs\Common;
             });
         });
 
-        $('form').on('submit', function (e) {
+        $('form').on('submit', function(e) {
             $('.dataTable').DataTable().destroy();
             $('table').hide();
         });

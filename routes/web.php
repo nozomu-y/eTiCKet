@@ -47,6 +47,7 @@ Route::get('events/{event_id}/tickets', [TicketsController::class, 'index'])->wh
 Route::get('events/{event_id}/tickets/add', [TicketsController::class, 'add'])->where('event_id', '[0-9]+')->name('add_tickets');
 Route::post('events/{event_id}/tickets/add', [TicketsController::class, 'post_add'])->where('event_id', '[0-9]+')->name('post_add_tickets');
 Route::get('events/{event_id}/tickets/issue', [TicketsController::class, 'issue'])->where('event_id', '[0-9]+')->name('issue_tickets');
+Route::post('events/{event_id}/tickets/issue/confirm', [TicketsController::class, 'post_confirm_issue'])->where('event_id', '[0-9]+')->name('post_confirm_issue_tickets');
 Route::post('events/{event_id}/tickets/issue', [TicketsController::class, 'post_issue'])->where('event_id', '[0-9]+')->name('post_issue_tickets');
 Route::get('events/{event_id}/tickets/{ticket_id}', [TicketsController::class, 'show_ticket'])->where('event_id', '[0-9]+')->where('ticket_id', '[0-9]+')->name('show_ticket');
 
