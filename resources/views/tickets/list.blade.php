@@ -6,12 +6,15 @@ use App\Libs\Common;
 
 @section('style')
     <style>
-        table tbody tr.tr-hover:hover {
-            background-color: rgba(0, 0, 0, 0.075);
-            -webkit-transition: .5s;
-            transition: .5s;
-        }
+    table tbody tr.tr-hover {
+        background-color: rgba(0, 0, 0, 0.025);
+    }
 
+    table tbody tr.tr-hover:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+    }
     </style>
 @endsection
 

@@ -82,3 +82,13 @@ body {
 table th {
     font-weight: 600;
 }
+
+table.table-hover tbody tr {
+    background-color: rgba(0, 0, 0, 0.025);
+}
+
+table.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
