@@ -21,12 +21,9 @@ use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\GuestTicketsController;
 use App\Http\Controllers\FrontController;
 
-Route::get('/', function () {
-    return view('home');
-});
-
 Auth::routes(['register' => false, 'reset' => false]);
 
+Route::get('/home', function () { return redirect()->route('home'); });
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('front/qrreader', [FrontController::class, 'qrreader'])->name('qrreader');
@@ -62,4 +59,8 @@ Route::group(['middleware' => 'admin'], function () {
 Route::group(['middleware' => 'guest'], function () {
     Route::get('{event_id}/{ticket_id}/{token}', [GuestTicketsController::class, 'index'])
         ->where(['event_id', '[0-9]+', 'ticket_id', '[0-9]+', 'token', '[0-9a-zA-Z]+'])->name('guest_ticket');
+    Route::get('{event_id}/{ticket_id}/{token}/contact', [GuestTicketsController::class, 'contact'])
+        ->where(['event_id', '[0-9]+', 'ticket_id', '[0-9]+', 'token', '[0-9a-zA-Z]+'])->name('guest_contact');
+    Route::post('{event_id}/{ticket_id}/{token}/contact', [GuestTicketsController::class, 'post_contact'])
+        ->where(['event_id', '[0-9]+', 'ticket_id', '[0-9]+', 'token', '[0-9a-zA-Z]+'])->name('post_guest_contact');
 });

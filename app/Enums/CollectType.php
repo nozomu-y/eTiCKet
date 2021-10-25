@@ -42,4 +42,11 @@ final class CollectType extends Enum
         }
         return parent::getValue($key);
     }
+
+    public static function getFormAttribute($value) {
+        if ($value == self::REQUIRED) {
+            return "required";
+        }
+        return "";
+    }
 }
