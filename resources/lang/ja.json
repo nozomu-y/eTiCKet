@@ -83,6 +83,13 @@
     "collection_disabled": "収集しない",
     "collection_optional": "任意",
     "collection_required": "必須",
+    "register_contact": "連絡先を登録する",
+    "edit_contact": "連絡先を編集する",
+    "contact": "連絡先",
+    "open_brackets": "（",
+    "close_brackets": "）",
+    "register": "登録",
+    "unentered": "未入力",
     
     "EOF": "EOF"
 }

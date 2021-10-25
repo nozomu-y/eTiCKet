@@ -22,5 +22,5 @@ class PersonalInformations extends Model
      *
      * @var string
      */
-    protected $primaryKey = ['event_id', 'ticket_id'];
+    protected $primaryKey = 'id';
 }

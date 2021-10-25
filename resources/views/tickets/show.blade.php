@@ -1,5 +1,6 @@
 <?php
 use App\Libs\Common;
+use App\Enums\CollectType;
 ?>
 @extends('layouts.main')
 @section('title', $event->name)
@@ -41,14 +42,37 @@ use App\Libs\Common;
     @endif
     <div class="row">
         <div class="col-lg-4">
+            @if (session('error'))
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             @if ($ticket->is_checked_in)
                 <div class="alert alert-danger" role="alert">
                     {{ __('message.tickets.already_used') }}
                 </div>
             @endif
+            @if (isset($personal_info_unentered) && $personal_info_unentered)
+                <div class="alert alert-info" role="alert">
+                    {{ __('message.personal_informations.unentered') }}
+                </div>
+            @endif
             <div class="d-flex justify-content-center">
                 <div class="card mb-4 ticket">
-                    {!! QrCode::size(400)->generate(config('app.url') . '/' . $event->event_id . '/' . $ticket->ticket_id . '/' . $ticket->token) !!}
+                    @if (!isset($personal_info_unentered) || !$personal_info_unentered)
+                        {!! QrCode::size(400)->generate(config('app.url') . '/' . $event->event_id . '/' . $ticket->ticket_id . '/' . $ticket->token) !!}
+                    @endif
                     <div class="card-body">
                         <div class="text-center">
                             <?php
@@ -129,6 +153,45 @@ use App\Libs\Common;
                     </div>
                 </div>
             </div>
+
+            @if (url()->current() === route('guest_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]))
+                @if (isset($personal_info_unentered) && $personal_info_unentered)
+                    <div class="text-center">
+                        <a class="btn btn-primary mb-3" href="{{ route('guest_contact',['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('register_contact') }}</a>
+                    </div>
+                @else
+                    <div class="card mb-3">
+                        <div class="card-header">{{ __('contact') }}</div>
+                        <div class="card-body">
+                            <table>
+                                <tbody>
+                                    @if ($event->collect_name !== CollectType::DISABLED)
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('name') }}</th>
+                                        <td>{{ Common::is_null_or_empty($personal_info->name) ? __('unentered') : $personal_info->name }}</td>
+                                    </tr>
+                                    @endif
+                                    @if ($event->collect_email !== CollectType::DISABLED)
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('email') }}</th>
+                                        <td>{{ Common::is_null_or_empty($personal_info->email) ? __('unentered') : Common::hide_email($personal_info->email) }}</td>
+                                    </tr>
+                                    @endif
+                                    @if ($event->collect_phone_number !== CollectType::DISABLED)
+                                    <tr>
+                                        <th class="text-nowrap pr-3">{{ __('phone_number') }}</th>
+                                        <td>{{ Common::is_null_or_empty($personal_info->phone_number) ? __('unentered') : Common::hide_phone_number($personal_info->phone_number) }}</td>
+                                    </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <a class="btn btn-primary mb-3" href="{{ route('guest_contact',['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('edit_contact') }}</a>
+                    </div>
+                @endif
+            @endif
 
             <div>
                 <p>
