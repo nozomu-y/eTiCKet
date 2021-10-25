@@ -1,5 +1,7 @@
 <?php
 use App\Enums\SeatType;
+use App\Enums\CollectType;
+use App\Libs\Common;
 ?>
 @extends('layouts.main')
 @section('title', __('qrreader'))
@@ -23,6 +25,36 @@ use App\Enums\SeatType;
                         <strong class="mr-1">{{ __('price') }}</strong>
                         {{ $ticket->price }}
                     </p>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">{{ __('contact') }}</div>
+                <div class="card-body">
+                    <table>
+                        <tbody>
+                            @if ($event->collect_name !== CollectType::DISABLED)
+                                <tr>
+                                    <th class="text-nowrap pr-3">{{ __('name') }}</th>
+                                    <td>{{ Common::is_null_or_empty($personal_info->name) ? __('unentered') : $personal_info->name }}
+                                    </td>
+                                </tr>
+                            @endif
+                            @if ($event->collect_email !== CollectType::DISABLED)
+                                <tr>
+                                    <th class="text-nowrap pr-3">{{ __('email') }}</th>
+                                    <td>{{ Common::is_null_or_empty($personal_info->email) ? __('unentered') : Common::hide_email($personal_info->email) }}
+                                    </td>
+                                </tr>
+                            @endif
+                            @if ($event->collect_phone_number !== CollectType::DISABLED)
+                                <tr>
+                                    <th class="text-nowrap pr-3">{{ __('phone_number') }}</th>
+                                    <td>{{ Common::is_null_or_empty($personal_info->phone_number) ? __('unentered') : Common::hide_phone_number($personal_info->phone_number) }}
+                                    </td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <form method="POST" action="{{ route('post_collect_ticket') }}" class="text-center">
