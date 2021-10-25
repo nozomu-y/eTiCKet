@@ -108,6 +108,10 @@ class TicketsController extends Controller
                 'price' => $ticket->price
             );
         }
+        if (count($data) === 0) {
+            return redirect()->route('issue_tickets', ['event_id' => $event->event_id])
+                ->with('error', __('message.tickets.issue.select_at_least_one_ticket'));
+        }
         return view('tickets.confirm_issue', ['data' => $data, 'event' => $event])
             ->with('message', __('message.tickets.issue.confirm'));
     }
