@@ -66,7 +66,7 @@ use App\Enums\CollectType;
                                 class="col-md-4 col-form-label text-md-right">{{ __('open_at') }}</label>
                             <div class="col-md-6">
                                 <input id="open_at" type="time" class="form-control @error('open_at') is-invalid @enderror"
-                                    name="open_at" value="{{ date('H:i', strtotime($event->open_at)) }}">
+                                                                name="open_at" value="{{ $event->open_at == null ? "" : date('H:i', strtotime($event->open_at)) }}">
                                 @error('open_at')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -81,7 +81,7 @@ use App\Enums\CollectType;
                             <div class="col-md-6">
                                 <input id="start_at" type="time"
                                     class="form-control @error('start_at') is-invalid @enderror" name="start_at"
-                                    value="{{ date('H:i', strtotime($event->start_at)) }}">
+                                                                                                 value="{{ $event->start_at == null ? "" : date('H:i', strtotime($event->start_at)) }}">
                                 @error('start_at')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -94,7 +94,7 @@ use App\Enums\CollectType;
                             <label for="end_at" class="col-md-4 col-form-label text-md-right">{{ __('end_at') }}</label>
                             <div class="col-md-6">
                                 <input id="end_at" type="time" class="form-control @error('end_at') is-invalid @enderror"
-                                    name="end_at" value="{{ date('H:i', strtotime($event->end_at)) }}">
+                                                               name="end_at" value="{{ $event->end_at == null ? "" :  date('H:i', strtotime($event->end_at)) }}">
                                 @error('end_at')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
