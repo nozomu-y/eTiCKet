@@ -16,7 +16,9 @@ class EventsTableSeeder extends Seeder
      */
     public function run()
     {
-        $seats = ['A1-1','A1-2','A1-3','A1-4','A1-5'];
+        $row = 10;
+        $column = 20;
+        $ticket_num = $row * $column;
         $event_id = DB::table('events')->insertGetId([
             'name' => 'クリスマスコンサート（デモ）',
             'place' => '講堂',
@@ -26,17 +28,19 @@ class EventsTableSeeder extends Seeder
             'collect_name' => CollectType::REQUIRED,
             'collect_email' => CollectType::OPTIONAL,
             'collect_phone_number' => CollectType::OPTIONAL,
-            'ticket_id_max' => count($seats),
+            'ticket_id_max' => $ticket_num,
         ]);
         $ticket_id = 0;
-        foreach ($seats as $seat) {
-            $ticket_id = $ticket_id + 1;
-            DB::table('tickets')->insert([
-                'ticket_id' => $ticket_id,
-                'event_id' => $event_id,
-                'seat' => $seat,
-                'price' => 1200,
-            ]);
+        for ($i = 1; $i <= $row; $i++) {
+            for ($j = 1; $j <= $column; $j++) {
+                $ticket_id = $ticket_id + 1;
+                DB::table('tickets')->insert([
+                    'ticket_id' => $ticket_id,
+                    'event_id' => $event_id,
+                    'seat' => '扉L1 / 列' . $i . ' / ' . $j,
+                    'price' => 1000,
+                ]);
+            }
         }
     }
 }
