@@ -66,7 +66,8 @@ use App\Enums\CollectType;
                                 class="col-md-4 col-form-label text-md-right">{{ __('open_at') }}</label>
                             <div class="col-md-6">
                                 <input id="open_at" type="time" class="form-control @error('open_at') is-invalid @enderror"
-                                                                name="open_at" value="{{ $event->open_at == null ? "" : date('H:i', strtotime($event->open_at)) }}">
+                                    name="open_at"
+                                    value="{{ $event->open_at == null ? '' : date('H:i', strtotime($event->open_at)) }}">
                                 @error('open_at')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -81,7 +82,7 @@ use App\Enums\CollectType;
                             <div class="col-md-6">
                                 <input id="start_at" type="time"
                                     class="form-control @error('start_at') is-invalid @enderror" name="start_at"
-                                                                                                 value="{{ $event->start_at == null ? "" : date('H:i', strtotime($event->start_at)) }}">
+                                    value="{{ $event->start_at == null ? '' : date('H:i', strtotime($event->start_at)) }}">
                                 @error('start_at')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -94,7 +95,8 @@ use App\Enums\CollectType;
                             <label for="end_at" class="col-md-4 col-form-label text-md-right">{{ __('end_at') }}</label>
                             <div class="col-md-6">
                                 <input id="end_at" type="time" class="form-control @error('end_at') is-invalid @enderror"
-                                                               name="end_at" value="{{ $event->end_at == null ? "" :  date('H:i', strtotime($event->end_at)) }}">
+                                    name="end_at"
+                                    value="{{ $event->end_at == null ? '' : date('H:i', strtotime($event->end_at)) }}">
                                 @error('end_at')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -125,8 +127,12 @@ use App\Enums\CollectType;
                                 <select name="seat_type" id="seat_type"
                                     class="form-control @error('seat_type') is-invalid @enderror"
                                     value="{{ old('seat_type') }}" disabled required>
-                                    <option value="{{ SeatType::RESERVED }}" {{ $event->seat_type == SeatType::RESERVED ? "selected" : "" }}>{{ __('reserved') }}</option>
-                                    <option value="{{ SeatType::UNRESERVED }}" {{ $event->seat_type == SeatType::UNRESERVED ? "selected": "" }}>{{ __('unreserved') }}</option>
+                                    <option value="{{ SeatType::RESERVED }}"
+                                        {{ $event->seat_type == SeatType::RESERVED ? 'selected' : '' }}>
+                                        {{ __('reserved') }}</option>
+                                    <option value="{{ SeatType::UNRESERVED }}"
+                                        {{ $event->seat_type == SeatType::UNRESERVED ? 'selected' : '' }}>
+                                        {{ __('unreserved') }}</option>
                                 </select>
                                 @error('seat_type')
                                     <span class="invalid-feedback" role="alert">
@@ -139,7 +145,7 @@ use App\Enums\CollectType;
                         <hr>
                         <h3 class="h5">{{ __('collect_personal_information') }}</h3>
                         <p>
-                        {{__('message.events.add.collect_personal_information')}}
+                            {{ __('message.events.add.collect_personal_information') }}
                         </p>
 
                         <div class="form-group row">
@@ -149,9 +155,15 @@ use App\Enums\CollectType;
                                 <select name="collect_name" id="collect_name"
                                     class="form-control @error('collect_name') is-invalid @enderror"
                                     value="{{ old('collect_name') }}" required>
-                                    <option value="{{ CollectType::DISABLED }}" {{ $event->collect_name == CollectType::DISABLED ? "selected" : "" }}>{{ __('collection_disabled') }}</option>
-                                    <option value="{{ CollectType::OPTIONAL }}" {{ $event->collect_name == CollectType::OPTIONAL ? "selected" : "" }}>{{ __('collection_optional') }}</option>
-                                    <option value="{{ CollectType::REQUIRED }}" {{ $event->collect_name == CollectType::REQUIRED ? "selected" : "" }}>{{ __('collection_required') }}</option>
+                                    <option value="{{ CollectType::DISABLED }}"
+                                        {{ $event->collect_name == CollectType::DISABLED ? 'selected' : '' }}>
+                                        {{ __('collection_disabled') }}</option>
+                                    <option value="{{ CollectType::OPTIONAL }}"
+                                        {{ $event->collect_name == CollectType::OPTIONAL ? 'selected' : '' }}>
+                                        {{ __('collection_optional') }}</option>
+                                    <option value="{{ CollectType::REQUIRED }}"
+                                        {{ $event->collect_name == CollectType::REQUIRED ? 'selected' : '' }}>
+                                        {{ __('collection_required') }}</option>
                                 </select>
                                 @error('collect_name')
                                     <span class="invalid-feedback" role="alert">
@@ -168,9 +180,15 @@ use App\Enums\CollectType;
                                 <select name="collect_email" id="collect_email"
                                     class="form-control @error('collect_email') is-invalid @enderror"
                                     value="{{ old('collect_email') }}" required>
-                                    <option value="{{ CollectType::DISABLED }}" {{ $event->collect_email == CollectType::DISABLED ? "selected" : "" }}>{{ __('collection_disabled') }}</option>
-                                    <option value="{{ CollectType::OPTIONAL }}" {{ $event->collect_email == CollectType::OPTIONAL ? "selected" : "" }}>{{ __('collection_optional') }}</option>
-                                    <option value="{{ CollectType::REQUIRED }}" {{ $event->collect_email == CollectType::REQUIRED ? "selected" : "" }}>{{ __('collection_required') }}</option>
+                                    <option value="{{ CollectType::DISABLED }}"
+                                        {{ $event->collect_email == CollectType::DISABLED ? 'selected' : '' }}>
+                                        {{ __('collection_disabled') }}</option>
+                                    <option value="{{ CollectType::OPTIONAL }}"
+                                        {{ $event->collect_email == CollectType::OPTIONAL ? 'selected' : '' }}>
+                                        {{ __('collection_optional') }}</option>
+                                    <option value="{{ CollectType::REQUIRED }}"
+                                        {{ $event->collect_email == CollectType::REQUIRED ? 'selected' : '' }}>
+                                        {{ __('collection_required') }}</option>
                                 </select>
                                 @error('collect_email')
                                     <span class="invalid-feedback" role="alert">
@@ -187,9 +205,15 @@ use App\Enums\CollectType;
                                 <select name="collect_phone_number" id="collect_phone_number"
                                     class="form-control @error('collect_phone_number') is-invalid @enderror"
                                     value="{{ old('collect_phone_number') }}" required>
-                                    <option value="{{ CollectType::DISABLED }}" {{ $event->collect_phone_number == CollectType::DISABLED ? "selected" : "" }}>{{ __('collection_disabled') }}</option>
-                                    <option value="{{ CollectType::OPTIONAL }}" {{ $event->collect_phone_number == CollectType::OPTIONAL ? "selected" : "" }}>{{ __('collection_optional') }}</option>
-                                    <option value="{{ CollectType::REQUIRED }}" {{ $event->collect_phone_number == CollectType::REQUIRED ? "selected" : "" }}>{{ __('collection_required') }}</option>
+                                    <option value="{{ CollectType::DISABLED }}"
+                                        {{ $event->collect_phone_number == CollectType::DISABLED ? 'selected' : '' }}>
+                                        {{ __('collection_disabled') }}</option>
+                                    <option value="{{ CollectType::OPTIONAL }}"
+                                        {{ $event->collect_phone_number == CollectType::OPTIONAL ? 'selected' : '' }}>
+                                        {{ __('collection_optional') }}</option>
+                                    <option value="{{ CollectType::REQUIRED }}"
+                                        {{ $event->collect_phone_number == CollectType::REQUIRED ? 'selected' : '' }}>
+                                        {{ __('collection_required') }}</option>
                                 </select>
                                 @error('collect_phone_number')
                                     <span class="invalid-feedback" role="alert">
