@@ -34,6 +34,7 @@ return [
             'confirm' => '以下の内容でチケットを発券します。',
             'memo_placeholder' => '配布相手・配布担当者のメモなど',
             'error' => 'エラーが発生しました。再度実行してください。',
+            'select_at_least_one_ticket' => 'チケットを最低1枚選択してください。',
         ],
         'already_used' => 'このチケットは使用済みです。'
     ],
