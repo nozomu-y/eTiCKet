@@ -46,6 +46,7 @@ return [
         'error' => [
             'ticket_invalid' => 'チケットが無効です。',
             'already_checked_in' => '入場処理が既に完了しています。',
+            'personal_info_unentered' => '連絡先の入力が完了していません。',
         ],
         'qrcode' => [
             'form' => [

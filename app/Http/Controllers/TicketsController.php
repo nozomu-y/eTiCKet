@@ -104,7 +104,6 @@ class TicketsController extends Controller
             $data[] = array(
                 'ticket_id' => $ticket->ticket_id,
                 'seat' => $ticket->seat,
-                'door' => $ticket->door,
                 'price' => $ticket->price
             );
         }
