@@ -90,6 +90,7 @@
     "close_brackets": "）",
     "register": "登録",
     "unentered": "未入力",
+    "seat_list": "座席番号リスト",
     
     "EOF": "EOF"
 }

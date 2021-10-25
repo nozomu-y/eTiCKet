@@ -130,21 +130,17 @@ use App\Enums\CollectType;
                                 </tr>
                             </tbody>
                         </table>
-                        <table class="mt-1 d-flex justify-content-center"
-                            style="border-collapse: separate; border-spacing: 1em 0em;">
-                            <tbody>
-                                <tr>
-                                    @if ($ticket->seat != null)
+                        @if ($ticket->seat != null)
+                            <table class="mt-1 d-flex justify-content-center"
+                                style="border-collapse: separate; border-spacing: 1em 0em;">
+                                <tbody>
+                                    <tr>
                                         <th class="text-nowrap">{{ __('seat_no') }}</th>
                                         <td>{{ $ticket->seat }}</td>
-                                    @endif
-                                    @if ($ticket->door != null)
-                                        <th class="text-nowrap">{{ __('door_no') }}</th>
-                                        <td>{{ $ticket->door }}</td>
-                                    @endif
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        @endif
                         <div class="text-center mt-2">
                             <small class="text-monospace">No. {{ sprintf('%06d', $ticket->ticket_id) }}</small>
                             <br>
@@ -157,7 +153,8 @@ use App\Enums\CollectType;
             @if (url()->current() === route('guest_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]))
                 @if (isset($personal_info_unentered) && $personal_info_unentered)
                     <div class="text-center">
-                        <a class="btn btn-primary mb-3" href="{{ route('guest_contact',['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('register_contact') }}</a>
+                        <a class="btn btn-primary mb-3"
+                            href="{{ route('guest_contact', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('register_contact') }}</a>
                     </div>
                 @else
                     <div class="card mb-3">
@@ -166,29 +163,33 @@ use App\Enums\CollectType;
                             <table>
                                 <tbody>
                                     @if ($event->collect_name !== CollectType::DISABLED)
-                                    <tr>
-                                        <th class="text-nowrap pr-3">{{ __('name') }}</th>
-                                        <td>{{ Common::is_null_or_empty($personal_info->name) ? __('unentered') : $personal_info->name }}</td>
-                                    </tr>
+                                        <tr>
+                                            <th class="text-nowrap pr-3">{{ __('name') }}</th>
+                                            <td>{{ Common::is_null_or_empty($personal_info->name) ? __('unentered') : $personal_info->name }}
+                                            </td>
+                                        </tr>
                                     @endif
                                     @if ($event->collect_email !== CollectType::DISABLED)
-                                    <tr>
-                                        <th class="text-nowrap pr-3">{{ __('email') }}</th>
-                                        <td>{{ Common::is_null_or_empty($personal_info->email) ? __('unentered') : Common::hide_email($personal_info->email) }}</td>
-                                    </tr>
+                                        <tr>
+                                            <th class="text-nowrap pr-3">{{ __('email') }}</th>
+                                            <td>{{ Common::is_null_or_empty($personal_info->email) ? __('unentered') : Common::hide_email($personal_info->email) }}
+                                            </td>
+                                        </tr>
                                     @endif
                                     @if ($event->collect_phone_number !== CollectType::DISABLED)
-                                    <tr>
-                                        <th class="text-nowrap pr-3">{{ __('phone_number') }}</th>
-                                        <td>{{ Common::is_null_or_empty($personal_info->phone_number) ? __('unentered') : Common::hide_phone_number($personal_info->phone_number) }}</td>
-                                    </tr>
+                                        <tr>
+                                            <th class="text-nowrap pr-3">{{ __('phone_number') }}</th>
+                                            <td>{{ Common::is_null_or_empty($personal_info->phone_number) ? __('unentered') : Common::hide_phone_number($personal_info->phone_number) }}
+                                            </td>
+                                        </tr>
                                     @endif
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="text-center">
-                        <a class="btn btn-primary mb-3" href="{{ route('guest_contact',['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('edit_contact') }}</a>
+                        <a class="btn btn-primary mb-3"
+                            href="{{ route('guest_contact', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('edit_contact') }}</a>
                     </div>
                 @endif
             @endif

@@ -22,7 +22,7 @@ return [
     ],
     'tickets' => [
         'form' => [
-            'csv' => "seat_number,door_number\nA1,L1\nA2,L1",
+            'seat_list_help' => '座席番号を1行につき1席分入力してください。',
         ],
         'add' => [
             'success' => 'チケットを追加しました。',

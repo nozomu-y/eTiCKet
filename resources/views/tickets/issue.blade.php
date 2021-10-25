@@ -41,7 +41,6 @@ use App\Libs\Common;
                                 <th></th>
                                 <th class="text-nowrap">{{ __('ticket_no') }}</th>
                                 <th class="text-nowrap">{{ __('seat_no') }}</th>
-                                <th class="text-nowrap">{{ __('door_no') }}</th>
                                 <th class="text-nowrap">{{ __('price') }}</th>
                             </tr>
                         </thead>
@@ -57,7 +56,6 @@ use App\Libs\Common;
                                         </td>
                                         <td class="text-nowrap">{{ sprintf('%06d', $ticket->ticket_id) }}</td>
                                         <td class="text-nowrap">{{ $ticket->seat }}</td>
-                                        <td class="text-nowrap">{{ $ticket->door }}</td>
                                         <td class="text-nowrap">{{ Common::format_price($ticket->price) }}</td>
                                     </tr>
                                 @endif
@@ -88,7 +86,7 @@ use App\Libs\Common;
                     targets: 0
                 }, {
                     type: "currency",
-                    targets: 4
+                    targets: 3
                 }],
                 "deferRender": false,
                 "autowidth": false,

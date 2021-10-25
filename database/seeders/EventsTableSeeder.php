@@ -16,6 +16,7 @@ class EventsTableSeeder extends Seeder
      */
     public function run()
     {
+        $seats = ['A1-1','A1-2','A1-3','A1-4','A1-5'];
         $event_id = DB::table('events')->insertGetId([
             'name' => 'クリスマスコンサート（デモ）',
             'place' => '講堂',
@@ -25,8 +26,8 @@ class EventsTableSeeder extends Seeder
             'collect_name' => CollectType::REQUIRED,
             'collect_email' => CollectType::OPTIONAL,
             'collect_phone_number' => CollectType::OPTIONAL,
+            'ticket_id_max' => count($seats),
         ]);
-        $seats = ['A1-1','A1-2','A1-3','A1-4','A1-5'];
         $ticket_id = 0;
         foreach ($seats as $seat) {
             $ticket_id = $ticket_id + 1;

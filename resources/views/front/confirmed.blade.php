@@ -20,11 +20,6 @@ use App\Enums\SeatType;
                             {{ $ticket->seat }}
                             <br>
                         @endif
-                        @if ($ticket->door != null)
-                            <strong class="mr-1">{{ __('door_no') }}</strong>
-                            {{ $ticket->door }}
-                            <br>
-                        @endif
                         <strong class="mr-1">{{ __('price') }}</strong>
                         {{ $ticket->price }}
                     </p>
