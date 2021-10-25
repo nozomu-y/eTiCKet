@@ -28,6 +28,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('front/qrreader', [FrontController::class, 'qrreader'])->name('qrreader');
 Route::post('front/qrreader', [FrontController::class, 'post_qrreader'])->name('post_qrreader');
+Route::get('front/qrreader/form', [FrontController::class, 'qrcode_unreadable'])->name('qrcode_unreadable');
+Route::post('front/qrreader/form', [FrontController::class, 'post_qrcode_unreadable'])->name('post_qrcode_unreadable');
 Route::post('front/collect', [FrontController::class, 'post_collect_ticket'])->name('post_collect_ticket');
 
 Route::get('account_setting/change_password', function () {

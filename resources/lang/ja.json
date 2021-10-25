@@ -91,6 +91,9 @@
     "register": "登録",
     "unentered": "未入力",
     "seat_list": "座席番号リスト",
+    "qrcode_unreadable": "QRコードが読み取れない場合",
+    "token": "トークン",
+    "send": "送信",
     
     "EOF": "EOF"
 }

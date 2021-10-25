@@ -46,6 +46,11 @@ return [
             'ticket_invalid' => 'チケットが無効です。',
             'already_checked_in' => '入場処理が既に完了しています。',
         ],
+        'qrcode' => [
+            'form' => [
+                'token' => 'チケット下部に示されているランダムな文字列のうち、最初の6文字を入力してください。',
+            ],
+        ],
     ],
     'personal_informations' => [
         'unentered' => 'QRコードを表示するには連絡先を登録してください。',
