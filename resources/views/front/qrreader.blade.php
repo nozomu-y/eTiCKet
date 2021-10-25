@@ -22,6 +22,7 @@
                 @csrf
                 <input type="hidden" name="data" value="" />
             </form>
+            <a class="btn btn-primary" href="{{ route('qrcode_unreadable') }}">{{ __('qrcode_unreadable') }}</a>
         </div>
     </div>
 @endsection
