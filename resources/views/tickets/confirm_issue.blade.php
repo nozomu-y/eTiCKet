@@ -46,7 +46,6 @@ use App\Libs\Common;
                             <tr>
                                 <th class="text-nowrap">{{ __('ticket_no') }}</th>
                                 <th class="text-nowrap">{{ __('seat_no') }}</th>
-                                <th class="text-nowrap">{{ __('door_no') }}</th>
                                 <th class="text-nowrap">{{ __('price') }}</th>
                             </tr>
                         </thead>
@@ -58,7 +57,6 @@ use App\Libs\Common;
                                         <input type="hidden" name="check_{{ $ticket['ticket_id'] }}" value="1"></input>
                                     </td>
                                     <td class="text-nowrap">{{ $ticket['seat'] }}</td>
-                                    <td class="text-nowrap">{{ $ticket['door'] }}</td>
                                     <td class="text-nowrap">{{ Common::format_price($ticket['price']) }}</td>
                                 </tr>
                             @endforeach
@@ -90,7 +88,7 @@ use App\Libs\Common;
                 ],
                 "columnDefs": [{
                     type: "currency",
-                    targets: 3
+                    targets: 2
                 }],
                 "deferRender": false,
                 "autowidth": false,

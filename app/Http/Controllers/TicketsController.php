@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Models\Events;
 use App\Models\Tickets;
 use App\Enums\SeatType;
+use App\Libs\Common;
 
 class TicketsController extends Controller
 {
@@ -43,38 +44,29 @@ class TicketsController extends Controller
             'price' => ['required', 'integer', 'min:0'],
         ]);
         $validator->validate();
-        $csv = $request['csv'];
+        $seat_list = $request['seat_list'];
         $price = $request['price'];
-        $csv = str_replace(array("\r\n", "\r", "\n"), "\n", $csv);
-        $csv_lines = explode("\n", $csv);
-        $csv_data = array();
-        foreach ($csv_lines as $line) {
-            $data = str_getcsv($line);
-            if ($data[0] == 'seat_number' && $data[1] == 'door_number') {
+        $seat_list = str_replace(array("\r\n", "\r", "\n"), "\n", $seat_list);
+        $seats = explode("\n", $seat_list);
+        $seat_data = array();
+        foreach ($seats as $seat) {
+            if (Common::is_null_or_empty($seat)) {
                 continue;
             }
-            if (count($data) != 2) {
-                continue;
-            }
-            $csv_data[] = $data;
+            $seat_data[] = $seat;
         }
 
         $event = Events::where('event_id', $event_id)->get()->first();
 
         $ticket_id = $event->ticket_id_max;
-        foreach ($csv_data as $data) {
+        foreach ($seat_data as $data) {
             $ticket_id = $ticket_id + 1;
 
             $ticket = new Tickets();
             $ticket->ticket_id = $ticket_id;
             $ticket->event_id = $event_id;
             $ticket->price = $price;
-            if ($data[0] != "") {
-                $ticket->seat = $data[0];
-            }
-            if ($data[1] != "") {
-                $ticket->door = $data[1];
-            }
+            $ticket->seat = $data;
             $ticket->save();
         }
         $event->ticket_id_max = $ticket_id;

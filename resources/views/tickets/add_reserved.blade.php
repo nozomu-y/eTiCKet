@@ -34,12 +34,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="csv" class="col-md-4 col-form-label text-md-right">{{ __('csv') }}</label>
+                            <label for="seat_list" class="col-md-4 col-form-label text-md-right">{{ __('seat_list') }}</label>
                             <div class="col-md-6">
-                                <textarea id="csv" rows="5" class="form-control @error('csv') is-invalid @enderror"
-                                    name="csv" value="{{ old('csv') }}"
-                                    required>{{ __('message.tickets.form.csv') }}</textarea>
-                                @error('csv')
+                                <textarea id="seat_list" rows="5" class="form-control @error('seat_list') is-invalid @enderror"
+                                    name="seat_list" value="{{ old('seat_list') }}"
+                                    required></textarea>
+                                <small id="seat_list_help" class="form-text text-muted">{{ __('message.tickets.form.seat_list_help') }}</small>
+                                @error('seat_list')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
