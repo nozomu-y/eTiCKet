@@ -61,6 +61,9 @@ class GuestTicketsController extends Controller
         if ($token !== $ticket->token) {
             return view('errors.404');
         }
+        if ($ticket->is_checked_in) {
+            return view('errors.404');
+        }
         return view('tickets.contact', ['event' => $event, 'ticket' => $ticket]);
     }
 
@@ -69,6 +72,9 @@ class GuestTicketsController extends Controller
         $event = Events::where('event_id', $event_id)->get()->first();
         $ticket = Tickets::where('event_id', $event_id)->where('ticket_id', $ticket_id)->get()->first();
         if ($token !== $ticket->token) {
+            return view('errors.404');
+        }
+        if ($ticket->is_checked_in) {
             return view('errors.404');
         }
         $validator = $this->contact_validator($request->all(), $event);
