@@ -151,7 +151,7 @@ use App\Enums\CollectType;
             </div>
 
             @if (url()->current() === route('guest_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]))
-                @if (isset($personal_info_unentered) && $personal_info_unentered)
+                @if (isset($personal_info_unentered) && $personal_info_unentered && !$ticket->is_checked_in)
                     <div class="text-center">
                         <a class="btn btn-primary mb-3"
                             href="{{ route('guest_contact', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('register_contact') }}</a>
@@ -187,10 +187,12 @@ use App\Enums\CollectType;
                             </table>
                         </div>
                     </div>
-                    <div class="text-center">
-                        <a class="btn btn-primary mb-3"
-                            href="{{ route('guest_contact', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('edit_contact') }}</a>
-                    </div>
+                    @if (!$ticket->is_checked_in)
+                        <div class="text-center">
+                            <a class="btn btn-primary mb-3"
+                                href="{{ route('guest_contact', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('edit_contact') }}</a>
+                        </div>
+                    @endif
                 @endif
             @endif
 
