@@ -22,5 +22,5 @@ class Tickets extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'ticket_id';
+    protected $primaryKey = 'id';
 }
