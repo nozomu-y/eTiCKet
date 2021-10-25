@@ -63,7 +63,7 @@ use App\Libs\Common;
                         </tbody>
                     </table>
                 </div>
-                <button type="submit" class="btn btn-primary">{{ __('issue_tickets_abbrev') }}</button>
+                <button type="submit" class="btn btn-primary" id="submit_button">{{ __('issue_tickets_abbrev') }}</button>
             </form>
         </div>
     </div>
@@ -100,6 +100,8 @@ use App\Libs\Common;
         $('form').on('submit', function (e) {
             $('.dataTable').DataTable().destroy();
             $('table').hide();
+            $('#submit_button').prop('disabled', true);
+            $('#submit_button').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
         });
     </script>
 @endsection

@@ -63,12 +63,12 @@ use App\Libs\Common;
                         </tbody>
                     </table>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="memo_form_group">
                     <label for="memo">{{ __('ticket_memo') }}</label>
                     <input id="memo" type="text" class="form-control" name="memo" value="{{ old('memo') }}"
                         placeholder="{{ __('message.tickets.issue.memo_placeholder') }}">
                 </div>
-                <button type="submit" class="btn btn-primary">{{ __('issue_tickets_abbrev') }}</button>
+                <button type="submit" class="btn btn-primary" id="submit_button">{{ __('issue_tickets_abbrev') }}</button>
             </form>
         </div>
     </div>
@@ -102,6 +102,9 @@ use App\Libs\Common;
         $('form').on('submit', function(e) {
             $('.dataTable').DataTable().destroy();
             $('table').hide();
+            $('#memo_form_group').hide();
+            $('#submit_button').prop('disabled', true);
+            $('#submit_button').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
         });
     </script>
 @endsection
