@@ -117,6 +117,9 @@ class TicketsController extends Controller
         $event = Events::where('event_id', $event_id)->get()->first();
         $memo = $request['memo'];
         $data = array();
+
+        // check whether the tickets are already issued
+        $error = -1;
         foreach ($request->all() as $key => $value) {
             if (strpos($key, 'check') === false) {
                 continue;
@@ -127,11 +130,39 @@ class TicketsController extends Controller
             $ticket_id = (int)explode("_", $key)[1];
             $ticket = Tickets::where('event_id', $event->event_id)->where('ticket_id', $ticket_id)->get()->first();
             $ticket->token = Str::random(32);
+            if ($ticket->is_issued == 1) {
+                $error = $ticket_id;
+                break;
+            }
             $ticket->is_issued = 1;
             $ticket->memo = $memo;
             $ticket->save();
             $data[] = array($ticket->ticket_id, $ticket->token);
         }
+
+        // if a ticket was already issued
+        if ($error != -1) {
+            // revert
+            foreach ($request->all() as $key => $value) {
+                if (strpos($key, 'check') === false) {
+                    continue;
+                }
+                if ($value != 1) {
+                    continue;
+                }
+                $ticket_id = (int)explode("_", $key)[1];
+                if ($ticket_id == $error) {
+                    break;
+                }
+                $ticket = Tickets::where('event_id', $event->event_id)->where('ticket_id', $ticket_id)->get()->first();
+                $ticket->token = null;
+                $ticket->is_issued = 0;
+                $ticket->memo = null;
+                $ticket->save();
+            }
+            return redirect()->route('issue_tickets', ['event_id' => $event->event_id])->with('error', __('message.tickets.issue.error'));
+        }
+
         return view('tickets.links', ['data' => $data, 'event' => $event])
             ->with('success', __('message.tickets.issue.success_before') . count($data) . __('message.tickets.issue.success_after'));
     }
