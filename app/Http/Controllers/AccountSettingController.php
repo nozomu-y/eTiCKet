@@ -24,7 +24,7 @@ class AccountSettingController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('home')->with('success', __('message.change_password.success'));
+        return redirect()->route('home')->with('success', __('message.account.change_password.success'));
     }
 
     /**
@@ -38,7 +38,7 @@ class AccountSettingController extends Controller
         return Validator::make($data, [
             'current_password' => ['required', 'string', 'min:8', function ($attribute, $value, $fail) use ($user) {
                 if (!Hash::check($value, $user->password)) {
-                    return $fail(__('message.change_password.current_password_incorrect'));
+                    return $fail(__('message.account.change_password.current_password_incorrect'));
                 }
             }],
             'password' => ['required', 'string', 'min:8', 'confirmed'],

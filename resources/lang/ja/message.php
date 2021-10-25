@@ -1,6 +1,12 @@
 <?php
 
 return [
+    'account' => [
+        'change_password' => [
+            'current_password_incorrect' => '現在のパスワードが異なります。',
+            'success' => 'パスワードを変更しました。',
+        ],
+    ],
     'accounts' => [
         'add' => [
             'success' => 'アカウントを追加しました。',
