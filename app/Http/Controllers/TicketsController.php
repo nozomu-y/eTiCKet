@@ -108,7 +108,8 @@ class TicketsController extends Controller
                 'price' => $ticket->price
             );
         }
-        return view('tickets.confirm_issue', ['data' => $data, 'event' => $event]);
+        return view('tickets.confirm_issue', ['data' => $data, 'event' => $event])
+            ->with('message', __('message.tickets.issue.confirm'));
     }
 
     function post_issue(Request $request, $event_id)
@@ -131,7 +132,8 @@ class TicketsController extends Controller
             $ticket->save();
             $data[] = array($ticket->ticket_id, $ticket->token);
         }
-        return view('tickets.links', ['data' => $data, 'event' => $event])->with('success', __('message.tickets.issue.success'));
+        return view('tickets.links', ['data' => $data, 'event' => $event])
+            ->with('success', __('message.tickets.issue.success_before') . count($data) . __('message.tickets.issue.success_after'));
     }
 
     function show_ticket($event_id, $ticket_id)

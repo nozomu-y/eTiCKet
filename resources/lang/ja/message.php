@@ -29,6 +29,8 @@ return [
         ],
         'issue' => [
             'success' => 'チケットを発券しました。',
+            'success_before' => 'チケットを',
+            'success_after' => '枚発券しました。',
             'confirm' => '以下の内容でチケットを発券します。',
             'memo_placeholder' => '配布相手・配布担当者のメモなど',
         ],
