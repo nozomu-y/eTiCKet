@@ -41,7 +41,7 @@ class FrontController extends Controller
         if ($ticket->is_checked_in) {
             return view('front.error')->with('error', __('message.front.error.already_checked_in'));
         }
-        return view('front.confirm', ['ticket' => $ticket, 'event' => $event, 'token' => $token]);
+        return view('front.confirm', ['ticket' => $ticket, 'event' => $event, 'token' => $token, 'personal_info' => $personal_info]);
     }
 
     function post_collect_ticket(Request $request)
@@ -51,8 +51,13 @@ class FrontController extends Controller
         $token = $request->all()['token'];
         $event = Events::where('event_id', $event_id)->get()->first();
         $ticket = Tickets::where('event_id', $event_id)->where('ticket_id', $ticket_id)->get()->first();
+        $personal_info = PersonalInformations::where(['event_id' => $event_id, 'ticket_id' => $ticket_id])->get()->first();
+        $personal_info_unentered = $this->check_personal_information_unentered($personal_info, $event);
         if ($token !== $ticket->token || !$ticket->is_issued) {
             return view('front.error')->with('error', __('message.front.error.ticket_invalid'));
+        }
+        if ($personal_info_unentered) {
+            return view('front.error')->with('error', __('message.front.error.personal_info_unentered'));
         }
         if ($ticket->is_checked_in) {
             return view('front.error')->with('error', __('message.front.error.already_checked_in'));
@@ -60,7 +65,7 @@ class FrontController extends Controller
         $ticket->is_checked_in = 1;
         $ticket->check_in_at = now();
         $ticket->save();
-        return view('front.confirmed', ['ticket' => $ticket, 'event' => $event]);
+        return view('front.confirmed', ['ticket' => $ticket, 'event' => $event, 'personal_info' => $personal_info]);
     }
 
     function qrcode_unreadable() {
@@ -91,7 +96,7 @@ class FrontController extends Controller
         if ($ticket->is_checked_in) {
             return view('front.error')->with('error', __('message.front.error.already_checked_in'));
         }
-        return view('front.confirm', ['ticket' => $ticket, 'event' => $event, 'token' => $token]);
+        return view('front.confirm', ['ticket' => $ticket, 'event' => $event, 'token' => $ticket->token, 'personal_info' => $personal_info]);
     }
 
     protected function validator(array $data)
