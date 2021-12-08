@@ -47,6 +47,7 @@ use App\Libs\Common;
                                 <th class="text-nowrap">{{ __('ticket_no') }}</th>
                                 <th class="text-nowrap">{{ __('seat_no') }}</th>
                                 <th class="text-nowrap">{{ __('price') }}</th>
+                                <th class="text-nowrap">{{ __('memo') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,15 +59,11 @@ use App\Libs\Common;
                                     </td>
                                     <td class="text-nowrap">{{ $ticket['seat'] }}</td>
                                     <td class="text-nowrap">{{ Common::format_price($ticket['price']) }}</td>
+                                    <td>{{ $ticket['memo'] }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-                <div class="form-group" id="memo_form_group">
-                    <label for="memo">{{ __('ticket_memo') }}</label>
-                    <input id="memo" type="text" class="form-control" name="memo" value="{{ old('memo') }}"
-                        placeholder="{{ __('message.tickets.issue.memo_placeholder') }}">
                 </div>
                 <button type="submit" class="btn btn-primary" id="submit_button">{{ __('issue_tickets_abbrev') }}</button>
             </form>
