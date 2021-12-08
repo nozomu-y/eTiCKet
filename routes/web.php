@@ -51,6 +51,9 @@ Route::get('events/{event_id}/tickets/issue', [TicketsController::class, 'issue'
 Route::post('events/{event_id}/tickets/issue/confirm', [TicketsController::class, 'post_confirm_issue'])->where('event_id', '[0-9]+')->name('post_confirm_issue_tickets');
 Route::post('events/{event_id}/tickets/issue', [TicketsController::class, 'post_issue'])->where('event_id', '[0-9]+')->name('post_issue_tickets');
 Route::get('events/{event_id}/tickets/{ticket_id}', [TicketsController::class, 'show_ticket'])->where('event_id', '[0-9]+')->where('ticket_id', '[0-9]+')->name('show_ticket');
+Route::get('events/{event_id}/tickets/{ticket_id}/edit', [TicketsController::class, 'edit'])->where('event_id', '[0-9]+')->where('ticket_id', '[0-9]+')->name('edit_ticket');
+Route::post('events/{event_id}/tickets/{ticket_id}/edit', [TicketsController::class, 'post_edit'])->where('event_id', '[0-9]+')->where('ticket_id', '[0-9]+')->name('post_edit_ticket');
+Route::post('events/{event_id}/tickets/{ticket_id}/delete', [TicketsController::class, 'delete'])->where('event_id', '[0-9]+')->where('ticket_id', '[0-9]+')->name('delete_ticket');
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('accounts', [AccountsController::class, 'index'])->name('accounts');

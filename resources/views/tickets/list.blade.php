@@ -15,6 +15,26 @@ use App\Libs\Common;
         -webkit-transition: 0.5s;
         transition: 0.5s;
     }
+
+    table tbody tr.tr-hover-issued {
+        background-color: rgba(57, 192, 237, 0.05);
+    }
+
+    table tbody tr.tr-hover-issued:hover {
+        background-color: rgba(57, 192, 237, 0.1);
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+    }
+
+    table tbody tr.tr-hover-used {
+        background-color: rgba(0, 183, 74, 0.05);
+    }
+
+    table tbody tr.tr-hover-used:hover {
+        background-color: rgba(0, 183, 74, 0.1);
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+    }
     </style>
 @endsection
 
@@ -55,21 +75,27 @@ use App\Libs\Common;
                             <th class="text-nowrap">{{ __('price') }}</th>
                             <th class="text-nowrap">{{ __('issue') }}</th>
                             <th class="text-nowrap">{{ __('check_in') }}</th>
+                            <th class="text-nowrap">{{ __('memo') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($tickets as $ticket)
-                            @if ($ticket->is_issued)
+                            @if ($ticket->is_checked_in)
+                                <tr class="tr-hover-used"
+                                    onclick="window.location='{{ route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}'">
+                            @elseif ($ticket->is_issued)
+                                <tr class="tr-hover-issued"
+                                    onclick="window.location='{{ route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}'">
+                            @else
                                 <tr class="tr-hover"
                                     onclick="window.location='{{ route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}'">
-                                @else
-                                <tr>
                             @endif
                             <td class="text-nowrap">{{ sprintf('%06d', $ticket->ticket_id) }}</td>
                             <td class="text-nowrap">{{ $ticket->seat }}</td>
                             <td class="text-nowrap">{{ Common::format_price($ticket->price) }}</td>
                             <td class="text-nowrap">{{ $ticket->is_issued ? __('done') : '' }}</td>
                             <td class="text-nowrap">{{ $ticket->is_checked_in ? __('done') : '' }}</td>
+                            <td class="text-truncate" style="max-width: 20rem;">{{ $ticket->memo }}</td>
                             </tr>
                         @endforeach
                     </tbody>

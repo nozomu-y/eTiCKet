@@ -174,10 +174,49 @@ class TicketsController extends Controller
     {
         $event = Events::where('event_id', $event_id)->get()->first();
         $ticket = Tickets::where('event_id', $event_id)->where('ticket_id', $ticket_id)->get()->first();
-        if (!$ticket->is_issued) {
-            return view('errors.404');
-        }
+        // if (!$ticket->is_issued) {
+            // return view('errors.404');
+        // }
         $seat_type = SeatType::getDescription($event->seat_type);
         return view('tickets.show', ['event' => $event, 'ticket' => $ticket, 'seat_type' => $seat_type]);
+    }
+
+    function edit($event_id, $ticket_id)
+    {
+        $event = Events::where('event_id', $event_id)->get()->first();
+        $ticket = Tickets::where('event_id', $event_id)->where('ticket_id', $ticket_id)->get()->first();
+        return view('tickets.edit', ['event' => $event, 'ticket' => $ticket]); // , 'seat_type' => $seat_type]);
+    }
+
+    function post_edit(Request $request, $event_id, $ticket_id)
+    {
+        $validator = $this->edit_validator($request->all());
+        $validator->validate();
+
+        $ticket = Tickets::where('event_id', $event_id)->where('ticket_id', $ticket_id)->get()->first();
+        $ticket->seat = $request['seat'];
+        $ticket->price = $request['price'];
+        $ticket->memo = $request['memo'];
+        $ticket->save();
+
+        return redirect()->route('show_ticket', ['event_id' => $event_id, 'ticket_id' => $ticket_id])->with('success', __('message.tickets.edit.success'));
+    }
+
+    protected function edit_validator(array $data)
+    {
+        return Validator::make($data, [
+            'seat' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'integer', 'min:0'],
+            'memo' => ['nullable', 'string', 'max:255'],
+        ]);
+    }
+
+    function delete($event_id, $ticket_id)
+    {
+        $result = Tickets::where('event_id', $event_id)->where('ticket_id', $ticket_id)->delete();
+        if (!$result) {
+            return redirect()->route('tickets', ['event_id' => $event_id])->with('error', __('message.tickets.delete.error'));
+        }
+        return redirect()->route('tickets', ['event_id' => $event_id])->with('success', __('message.tickets.delete.success'));
     }
 }

@@ -41,6 +41,8 @@
 
     "add_tickets": "チケットを追加する",
     "add_tickets_abbrev": "チケット追加",
+    "edit_ticket": "チケットを編集する",
+    "delete_ticket": "チケットを削除する",
     "issue_tickets": "チケットを発券する",
     "issue_tickets_abbrev": "チケット発券",
     "confirm": "確認",
