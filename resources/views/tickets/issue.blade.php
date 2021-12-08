@@ -42,6 +42,7 @@ use App\Libs\Common;
                                 <th class="text-nowrap">{{ __('ticket_no') }}</th>
                                 <th class="text-nowrap">{{ __('seat_no') }}</th>
                                 <th class="text-nowrap">{{ __('price') }}</th>
+                                <th class="text-nowrap">{{ __('memo') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,6 +58,7 @@ use App\Libs\Common;
                                         <td class="text-nowrap">{{ sprintf('%06d', $ticket->ticket_id) }}</td>
                                         <td class="text-nowrap">{{ $ticket->seat }}</td>
                                         <td class="text-nowrap">{{ Common::format_price($ticket->price) }}</td>
+                                        <td>{{ $ticket->memo }}</td>
                                     </tr>
                                 @endif
                             @endforeach

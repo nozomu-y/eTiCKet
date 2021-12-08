@@ -104,7 +104,8 @@ class TicketsController extends Controller
             $data[] = array(
                 'ticket_id' => $ticket->ticket_id,
                 'seat' => $ticket->seat,
-                'price' => $ticket->price
+                'price' => $ticket->price,
+                'memo' => $ticket->memo
             );
         }
         if (count($data) === 0) {
@@ -118,7 +119,6 @@ class TicketsController extends Controller
     function post_issue(Request $request, $event_id)
     {
         $event = Events::where('event_id', $event_id)->get()->first();
-        $memo = $request['memo'];
         $data = array();
 
         // check whether the tickets are already issued
@@ -138,9 +138,8 @@ class TicketsController extends Controller
                 break;
             }
             $ticket->is_issued = 1;
-            $ticket->memo = $memo;
             $ticket->save();
-            $data[] = array($ticket->ticket_id, $ticket->token);
+            $data[] = array($ticket->ticket_id, $ticket->seat, $ticket->token);
         }
 
         // if a ticket was already issued

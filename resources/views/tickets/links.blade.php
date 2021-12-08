@@ -25,7 +25,8 @@
             $links = '';
             foreach ($data as $link) {
                 $links .= __('ticket_no') . '：' . $link[0] . "\n";
-                $links .= config('app.url') . '/' . $event->event_id . '/' . $link[0] . '/' . $link[1] . "\n\n";
+                $links .= __('seat_no') . '：' . $link[1] . "\n";
+                $links .= config('app.url') . '/' . $event->event_id . '/' . $link[0] . '/' . $link[2] . "\n\n";
             }
             ?>
             <div class="form-group">
