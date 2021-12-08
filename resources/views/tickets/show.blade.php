@@ -70,7 +70,7 @@ use App\Enums\CollectType;
             @endif
             <div class="d-flex justify-content-center">
                 <div class="card mb-4 ticket">
-                    @if (!isset($personal_info_unentered) || !$personal_info_unentered)
+                    @if ((!isset($personal_info_unentered) || !$personal_info_unentered) && $ticket->is_issued)
                         {!! QrCode::size(400)->generate(config('app.url') . '/' . $event->event_id . '/' . $ticket->ticket_id . '/' . $ticket->token) !!}
                     @endif
                     <div class="card-body">
@@ -150,7 +150,7 @@ use App\Enums\CollectType;
                 </div>
             </div>
 
-            @if (url()->current() === route('guest_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]))
+            @if ($ticket->token != null && url()->current() === route('guest_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]))
                 @if (isset($personal_info_unentered) && $personal_info_unentered && !$ticket->is_checked_in)
                     <div class="text-center">
                         <a class="btn btn-primary mb-3"
@@ -196,6 +196,7 @@ use App\Enums\CollectType;
                 @endif
             @endif
 
+            @if ($ticket->is_issued)
             <div>
                 <p>
                     <strong class="mr-1">{{ __('ticket_url') }}</strong>
@@ -203,6 +204,7 @@ use App\Enums\CollectType;
                         class="text-break">{{ config('app.url') . '/' . $event->event_id . '/' . $ticket->ticket_id . '/' . $ticket->token }}</a>
                 </p>
             </div>
+            @endif
         </div>
 
         <div class="col-lg-4 mb-3">
@@ -213,6 +215,26 @@ use App\Enums\CollectType;
                         {{ $ticket->memo }}
                     </div>
                 </div>
+            @endif
+        </div>
+
+        <div class="col-lg-4 mb-3">
+            @if (url()->current() === route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]))
+            <div class="list-group mb-4">
+                <a class="list-group-item list-group-item-action"
+                   href="{{ route('edit_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}">{{ __('edit_ticket') }}</a>
+                @if (!$ticket->is_issued)
+                <a class="list-group-item list-group-item-action text-danger"
+                    onclick="if (confirm('{{ __('message.tickets.delete.confirm') }}')) {event.preventDefault(); document.getElementById('delete-form').submit();}">{{ __('delete_ticket') }}</a>
+                <form id="delete-form" action="{{ route('delete_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}"
+                    method="POST" class="d-none">
+                    @csrf
+                </form>
+                @else
+                <a class="list-group-item list-group-item-action text-danger"
+                    onclick="alert('{{ __('message.tickets.delete.disabled') }}')">{{ __('delete_ticket') }}</a>
+                @endif
+            </div>
             @endif
         </div>
     </div>
