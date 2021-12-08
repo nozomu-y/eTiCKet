@@ -55,6 +55,7 @@ use App\Libs\Common;
                             <th class="text-nowrap">{{ __('price') }}</th>
                             <th class="text-nowrap">{{ __('issue') }}</th>
                             <th class="text-nowrap">{{ __('check_in') }}</th>
+                            <th class="text-nowrap">{{ __('memo') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,6 +71,7 @@ use App\Libs\Common;
                             <td class="text-nowrap">{{ Common::format_price($ticket->price) }}</td>
                             <td class="text-nowrap">{{ $ticket->is_issued ? __('done') : '' }}</td>
                             <td class="text-nowrap">{{ $ticket->is_checked_in ? __('done') : '' }}</td>
+                            <td class="text-truncate" style="max-width: 20rem;">{{ $ticket->memo }}</td>
                             </tr>
                         @endforeach
                     </tbody>
