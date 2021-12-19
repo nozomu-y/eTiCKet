@@ -1,13 +1,16 @@
+<?php
+$ver = '20211219';
+?>
 <!-- Bootstrap core JavaScript-->
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{{ asset('js/popper.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/mdb.min.js') }}"></script>
+<script src="{{ asset('js/jquery.min.js') }}?ver={{ $ver }}"></script>
+<script src="{{ asset('js/popper.min.js') }}?ver={{ $ver }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}?ver={{ $ver }}"></script>
+<script src="{{ asset('js/mdb.min.js') }}?ver={{ $ver }}"></script>
 
 <!-- Core plugin JavaScript-->
 
 <!-- Custom scripts for all pages-->
-<script src="{{ asset('js/Chart.min.js') }}"></script>
+<script src="{{ asset('js/Chart.min.js') }}?ver={{ $ver }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 <script type="text/javascript"
