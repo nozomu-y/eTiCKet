@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'home' => [
+        'latest_event' => [
+            'not_found' => '最新のイベントはありません。'
+        ],
+    ],
     'account' => [
         'change_password' => [
             'current_password_incorrect' => '現在のパスワードが異なります。',

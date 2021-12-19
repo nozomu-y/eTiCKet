@@ -1,5 +1,9 @@
 {
     "home": "ホーム",
+
+    "see_more": "さらに見る",
+    "latest_event": "最新のイベント",
+
     "account_setting": "アカウント設定",
     "change_password": "パスワード変更",
     "login": "ログイン",
@@ -25,6 +29,7 @@
     "member": "一般",
 
     "event": "イベント",
+    "event_detail": "イベント詳細",
     "event_information": "イベント情報",
     "event_list": "イベント一覧",
     "add_event": "イベントを追加する",

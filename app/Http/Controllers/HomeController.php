@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Events;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $latest_event = Events::whereDate('expire_at', '>', date('Y-m-d H:i:s'))->orderBy('date')->get()->first();
+        return view('home', ['event' => $latest_event]);
     }
 }
