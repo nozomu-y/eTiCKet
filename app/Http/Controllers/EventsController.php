@@ -25,7 +25,15 @@ class EventsController extends Controller
     function detail($id)
     {
         $event = Events::where('event_id', $id)->get()->first();
-        return view('events.detail', ['event' => $event]);
+        $num_tickets = Tickets::where('event_id', $id)->count();
+        $num_issued = Tickets::where('event_id', $id)->where('is_issued', 1)->count();
+        $num_checked_in = Tickets::where('event_id', $id)->where('is_checked_in', 1)->count();
+        return view('events.detail', [
+            'event' => $event,
+            'num_tickets' => $num_tickets,
+            'num_issued' => $num_issued,
+            'num_checked_in' => $num_checked_in
+        ]);
     }
 
     function add(Request $request)
