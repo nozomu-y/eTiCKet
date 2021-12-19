@@ -59,6 +59,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('accounts', [AccountsController::class, 'index'])->name('accounts');
     Route::get('accounts/add', function () { return view('accounts.add'); })->name('add_account');
     Route::post('accounts/add', [AccountsController::class, 'register'])->name('post_add_account');
+    Route::post('accounts/{user_id}/delete', [AccountsController::class, 'delete'])->where('user_id', '[0-9]+')->name('delete_account');
 });
 
 Route::group(['middleware' => 'guest'], function () {

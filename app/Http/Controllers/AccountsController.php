@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Enums\UserRole;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -43,7 +44,8 @@ class AccountsController extends Controller
         $this->middleware('admin');
     }
 
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         $validator = $this->validator($request->all());
         $validator->validate();
 
@@ -83,5 +85,18 @@ class AccountsController extends Controller
             array_push($data, $user_data);
         }
         return view('accounts.list', ['users' => $data]);
+    }
+
+    function delete($user_id)
+    {
+        $user = User::where('id', $user_id)->get()->first();
+        if ($user->role === UserRole::ADMIN) {
+            return redirect()->route('accounts')->with('error', __('message.accounts.delete.error'));
+        }
+        $result = $user->delete();
+        if (!$result) {
+            return redirect()->route('accounts')->with('error', __('message.accounts.delete.error'));
+        }
+        return redirect()->route('accounts')->with('success', __('message.accounts.delete.success'));
     }
 }
