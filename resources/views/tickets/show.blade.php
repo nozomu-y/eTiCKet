@@ -1,6 +1,7 @@
 <?php
 use App\Libs\Common;
 use App\Enums\CollectType;
+use App\Enums\UserRole;
 ?>
 @extends('layouts.main')
 @section('title', $event->name)
@@ -197,13 +198,13 @@ use App\Enums\CollectType;
             @endif
 
             @if ($ticket->is_issued)
-            <div>
-                <p>
-                    <strong class="mr-1">{{ __('ticket_url') }}</strong>
-                    <a href="{{ config('app.url') . '/' . $event->event_id . '/' . $ticket->ticket_id . '/' . $ticket->token }}"
-                        class="text-break">{{ config('app.url') . '/' . $event->event_id . '/' . $ticket->ticket_id . '/' . $ticket->token }}</a>
-                </p>
-            </div>
+                <div>
+                    <p>
+                        <strong class="mr-1">{{ __('ticket_url') }}</strong>
+                        <a href="{{ config('app.url') . '/' . $event->event_id . '/' . $ticket->ticket_id . '/' . $ticket->token }}"
+                            class="text-break">{{ config('app.url') . '/' . $event->event_id . '/' . $ticket->ticket_id . '/' . $ticket->token }}</a>
+                    </p>
+                </div>
             @endif
         </div>
 
@@ -220,21 +221,24 @@ use App\Enums\CollectType;
 
         <div class="col-lg-4 mb-3">
             @if (url()->current() === route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]))
-            <div class="list-group mb-4">
-                <a class="list-group-item list-group-item-action"
-                   href="{{ route('edit_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}">{{ __('edit_ticket') }}</a>
-                @if (!$ticket->is_issued)
-                <a class="list-group-item list-group-item-action text-danger"
-                    onclick="if (confirm('{{ __('message.tickets.delete.confirm') }}')) {event.preventDefault(); document.getElementById('delete-form').submit();}">{{ __('delete_ticket') }}</a>
-                <form id="delete-form" action="{{ route('delete_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}"
-                    method="POST" class="d-none">
-                    @csrf
-                </form>
-                @else
-                <a class="list-group-item list-group-item-action text-danger"
-                    onclick="alert('{{ __('message.tickets.delete.disabled') }}')">{{ __('delete_ticket') }}</a>
-                @endif
-            </div>
+                <div class="list-group mb-4">
+                    <a class="list-group-item list-group-item-action"
+                        href="{{ route('edit_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}">{{ __('edit_ticket') }}</a>
+                    @if (Auth::user()->role === UserRole::ADMIN)
+                        @if (!$ticket->is_issued)
+                            <a class="list-group-item list-group-item-action text-danger"
+                                onclick="if (confirm('{{ __('message.tickets.delete.confirm') }}')) {event.preventDefault(); document.getElementById('delete-form').submit();}">{{ __('delete_ticket') }}</a>
+                            <form id="delete-form"
+                                action="{{ route('delete_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}"
+                                method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        @else
+                            <a class="list-group-item list-group-item-action text-danger"
+                                onclick="alert('{{ __('message.tickets.delete.disabled') }}')">{{ __('delete_ticket') }}</a>
+                        @endif
+                    @endif
+                </div>
             @endif
         </div>
     </div>
