@@ -5,6 +5,7 @@
     <style>
         video {
             width: 100% !important;
+            border-radius: 0.5rem !important;
         }
 
     </style>
@@ -15,7 +16,7 @@
     <div class="row">
         <div class="col-12">
             <section id="qrreader">
-                <video id="camera" muted autoplay playsinline></video>
+                <video class="shadow mb-3" id="camera" muted autoplay playsinline></video>
                 <canvas id="picture" hidden></canvas>
             </section>
             <form action="{{ route('post_qrreader') }}" method="POST" name="QRPost">
