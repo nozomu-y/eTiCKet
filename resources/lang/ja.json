@@ -107,5 +107,11 @@
     "token": "トークン",
     "send": "送信",
 
+    "tickets_issue_status": "発券状況",
+    "tickets_check_in_status": "入場状況",
+    "unissued": "未発券",
+    "checked_in": "入場済み",
+    "not_checked_in": "未入場",
+
     "EOF": "EOF"
 }

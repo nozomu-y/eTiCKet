@@ -35,7 +35,7 @@ use App\Enums\UserRole;
                         </div>
                     @endif
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-body">
                             <h3 class="h5">{{ $event->name }}</h3>
@@ -98,6 +98,20 @@ use App\Enums\UserRole;
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <canvas id="ticketIssueRatioChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <canvas id="ticketCheckInRatioChart"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-lg-4">
@@ -121,4 +135,71 @@ use App\Enums\UserRole;
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    <script>
+        const data = {
+            labels: ['{{ __('issued') }}', '{{ __('unissued') }}'],
+            datasets: [{
+                label: 'Dataset 1',
+                data: [{{ $num_issued }}, {{ $num_tickets - $num_issued }}],
+                backgroundColor: Object.values(['#03a9f4', '#81d4fa']),
+            }]
+        };
+
+        const config = {
+            type: 'pie',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: '{{ __('tickets_issue_status') }}'
+                    }
+                }
+            },
+        };
+
+        const TicketRatioChart = new Chart(
+            document.getElementById('ticketIssueRatioChart'),
+            config
+        );
+    </script>
+    <script>
+        const data_check_in = {
+            labels: ['{{ __('checked_in') }}', '{{ __('not_checked_in') }}'],
+            datasets: [{
+                label: 'Dataset 1',
+                data: [{{ $num_checked_in }}, {{ $num_issued - $num_checked_in }}],
+                backgroundColor: Object.values(['#ff9800', '#ffcc80']),
+            }]
+        };
+
+        const config_check_in = {
+            type: 'pie',
+            data: data_check_in,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: '{{ __('tickets_check_in_status') }}'
+                    }
+                }
+            },
+        };
+
+        const TicketCheckInRatioChart = new Chart(
+            document.getElementById('ticketCheckInRatioChart'),
+            config_check_in
+        );
+    </script>
 @endsection
