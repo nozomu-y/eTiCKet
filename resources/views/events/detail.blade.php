@@ -1,6 +1,7 @@
 <?php
 use App\Enums\SeatType;
 use App\Enums\CollectType;
+use App\Enums\UserRole;
 ?>
 @extends('layouts.main')
 @section('title', $event->name)
@@ -109,12 +110,14 @@ use App\Enums\CollectType;
                     href="{{ route('issue_tickets', ['event_id' => $event->event_id]) }}">{{ __('issue_tickets') }}</a>
                 <a class="list-group-item list-group-item-action"
                     href="{{ route('edit_event', ['event_id' => $event->event_id]) }}">{{ __('edit_event') }}</a>
-                <a class="list-group-item list-group-item-action text-danger"
-                    onclick="if (confirm('{{ __('message.events.delete.confirm') }}')) {event.preventDefault(); document.getElementById('delete-form').submit();}">{{ __('delete_event') }}</a>
-                <form id="delete-form" action="{{ route('delete_event', ['event_id' => $event->event_id]) }}"
-                    method="POST" class="d-none">
-                    @csrf
-                </form>
+                @if (Auth::user()->role === UserRole::ADMIN)
+                    <a class="list-group-item list-group-item-action text-danger"
+                        onclick="if (confirm('{{ __('message.events.delete.confirm') }}')) {event.preventDefault(); document.getElementById('delete-form').submit();}">{{ __('delete_event') }}</a>
+                    <form id="delete-form" action="{{ route('delete_event', ['event_id' => $event->event_id]) }}"
+                        method="POST" class="d-none">
+                        @csrf
+                    </form>
+                @endif
             </div>
         </div>
     </div>
