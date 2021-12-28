@@ -223,6 +223,25 @@ use App\Enums\CollectType;
                             </div>
                         </div>
 
+                        <hr>
+                        <h3 class="h5">{{ __('memo_under_ticket') }}</h3>
+                        <p>
+                            {{ __('message.events.add.memo') }}
+                        </p>
+
+                        <div class="form-group row">
+                            <label for="memo" class="col-md-4 col-form-label text-md-right">{{ __('memo') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="memo" rows="5" class="form-control @error('memo') is-invalid @enderror"
+                                    name="memo" value="{{ old('memo') }}">{{ $event->memo }}</textarea>
+                                @error('memo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

@@ -92,6 +92,7 @@ class EventsController extends Controller
         $event->collect_name = $request['collect_name'];
         $event->collect_email = $request['collect_email'];
         $event->collect_phone_number = $request['collect_phone_number'];
+        $event->memo = $request['memo'];
         $event->save();
 
         return redirect()->route('event_detail', ['event_id' => $event->event_id])->with('success', __('message.events.edit.success'));

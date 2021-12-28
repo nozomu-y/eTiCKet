@@ -31,6 +31,7 @@ return [
         'add' => [
             'success' => 'イベントを追加しました。',
             'collect_personal_information' => '観客の個人情報を収集する場合は以下で指定してください。',
+            'memo' => '注意事項などをMarkdown形式で記入してください。',
         ],
         'edit' => [
             'success' => 'イベントを編集しました。',
