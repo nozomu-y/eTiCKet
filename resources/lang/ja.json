@@ -113,6 +113,7 @@
     "unissued": "未発券",
     "checked_in": "入場済み",
     "not_checked_in": "未入場",
+    "memo_under_ticket": "チケット下部に表示されるメモ",
 
     "EOF": "EOF"
 }

@@ -2,6 +2,12 @@
 use App\Enums\SeatType;
 use App\Enums\CollectType;
 use App\Enums\UserRole;
+
+$markdown = $event->memo;
+$parsedown = new Parsedown();
+$parsedown->setBreaksEnabled(true);
+$parsedown->setSafeMode(true);
+$memo_html = $parsedown->text($markdown);
 ?>
 @extends('layouts.main')
 @section('title', $event->name)
@@ -112,6 +118,16 @@ use App\Enums\UserRole;
                         </div>
                     </div>
                 </div>
+                @if (!empty($memo_html))
+                    <div class="col-12">
+                        <div class="card mb-4">
+                            <div class="card-header">{{ __('memo_under_ticket') }}</div>
+                            <div class="card-body">
+                                <?= $memo_html ?>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="col-lg-4">
