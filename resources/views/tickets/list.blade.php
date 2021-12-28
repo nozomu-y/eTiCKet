@@ -1,40 +1,42 @@
 <?php
 use App\Libs\Common;
+use App\Enums\UserRole;
 ?>
 @extends('layouts.main')
 @section('title', __('ticket_list'))
 
 @section('style')
     <style>
-    table tbody tr.tr-hover {
-        background-color: rgba(0, 0, 0, 0.025);
-    }
+        table tbody tr.tr-hover {
+            background-color: rgba(0, 0, 0, 0.025);
+        }
 
-    table tbody tr.tr-hover:hover {
-        background-color: rgba(0, 0, 0, 0.1);
-        -webkit-transition: 0.5s;
-        transition: 0.5s;
-    }
+        table tbody tr.tr-hover:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+        }
 
-    table tbody tr.tr-hover-issued {
-        background-color: rgba(57, 192, 237, 0.05);
-    }
+        table tbody tr.tr-hover-issued {
+            background-color: rgba(57, 192, 237, 0.05);
+        }
 
-    table tbody tr.tr-hover-issued:hover {
-        background-color: rgba(57, 192, 237, 0.1);
-        -webkit-transition: 0.5s;
-        transition: 0.5s;
-    }
+        table tbody tr.tr-hover-issued:hover {
+            background-color: rgba(57, 192, 237, 0.1);
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+        }
 
-    table tbody tr.tr-hover-used {
-        background-color: rgba(0, 183, 74, 0.05);
-    }
+        table tbody tr.tr-hover-used {
+            background-color: rgba(0, 183, 74, 0.05);
+        }
 
-    table tbody tr.tr-hover-used:hover {
-        background-color: rgba(0, 183, 74, 0.1);
-        -webkit-transition: 0.5s;
-        transition: 0.5s;
-    }
+        table tbody tr.tr-hover-used:hover {
+            background-color: rgba(0, 183, 74, 0.1);
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+        }
+
     </style>
 @endsection
 
@@ -76,6 +78,9 @@ use App\Libs\Common;
                             <th class="text-nowrap">{{ __('issue') }}</th>
                             <th class="text-nowrap">{{ __('check_in') }}</th>
                             <th class="text-nowrap">{{ __('memo') }}</th>
+                            <th class="text-nowrap">{{ __('name') }}</th>
+                            <th class="text-nowrap">{{ __('email') }}</th>
+                            <th class="text-nowrap">{{ __('phone_number') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -83,10 +88,10 @@ use App\Libs\Common;
                             @if ($ticket->is_checked_in)
                                 <tr class="tr-hover-used"
                                     onclick="window.location='{{ route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}'">
-                            @elseif ($ticket->is_issued)
+                                @elseif ($ticket->is_issued)
                                 <tr class="tr-hover-issued"
                                     onclick="window.location='{{ route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}'">
-                            @else
+                                @else
                                 <tr class="tr-hover"
                                     onclick="window.location='{{ route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}'">
                             @endif
@@ -96,6 +101,18 @@ use App\Libs\Common;
                             <td class="text-nowrap">{{ $ticket->is_issued ? __('done') : '' }}</td>
                             <td class="text-nowrap">{{ $ticket->is_checked_in ? __('done') : '' }}</td>
                             <td class="text-truncate" style="max-width: 20rem;">{{ $ticket->memo }}</td>
+                            @if (Auth::user()->role == UserRole::ADMIN)
+                                <td class="text-nowrap">{{ $ticket->name }}</td>
+                                <td class="text-nowrap">{{ $ticket->email }}</td>
+                                <td class="text-nowrap">{{ $ticket->phone_number }}</td>
+                            @else
+                                <td class="text-nowrap">{{ empty($ticket->name) ? '' : __('entered') }}
+                                </td>
+                                <td class="text-nowrap">{{ empty($ticket->email) ? '' : __('entered') }}
+                                </td>
+                                <td class="text-nowrap">
+                                    {{ empty($ticket->phone_number) ? '' : __('entered') }}</td>
+                            @endif
                             </tr>
                         @endforeach
                     </tbody>
