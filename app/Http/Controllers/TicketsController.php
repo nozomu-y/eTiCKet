@@ -21,7 +21,7 @@ class TicketsController extends Controller
     function index($event_id)
     {
         $event = Events::where('event_id', $event_id)->get()->first();
-        $tickets = DB::select(DB::raw('SELECT * FROM tickets left outer join (select name, email, phone_number, ticket_id as ticket_id_ from personal_informations where event_id=' . $event_id . ') as c on tickets.ticket_id = c.ticket_id_ WHERE tickets.event_id=' . $event_id));
+        $tickets = DB::select(DB::raw('SELECT * FROM tickets left outer join (select name, email, phone_number, ticket_id as ticket_id_ from personal_informations where event_id=' . $event_id . ') as c on tickets.ticket_id = c.ticket_id_ WHERE tickets.event_id=' . $event_id .' ORDER BY ticket_id'));
         return view(
             'tickets.list',
             [
