@@ -203,11 +203,13 @@ $memo_html = $parsedown->text($markdown);
                 @endif
             @endif
 
-            <div class="card mb-3">
-                <div class="card-body">
-                    <?= $memo_html ?>
+            @if (!empty($memo_html))
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <?= $memo_html ?>
+                    </div>
                 </div>
-            </div>
+            @endif
 
             @if ($ticket->is_issued)
                 <div>
