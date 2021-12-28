@@ -9,6 +9,7 @@ use App\Models\Events;
 use App\Models\Tickets;
 use App\Enums\SeatType;
 use App\Libs\Common;
+use Illuminate\Support\Facades\DB;
 
 class TicketsController extends Controller
 {
@@ -20,7 +21,7 @@ class TicketsController extends Controller
     function index($event_id)
     {
         $event = Events::where('event_id', $event_id)->get()->first();
-        $tickets = Tickets::where('event_id', $event_id)->get();
+        $tickets = DB::select(DB::raw('SELECT * FROM tickets left outer join (select name, email, phone_number, ticket_id as ticket_id_ from personal_informations where event_id=' . $event_id . ') as c on tickets.ticket_id = c.ticket_id_ WHERE tickets.event_id=' . $event_id));
         return view(
             'tickets.list',
             [
@@ -174,7 +175,7 @@ class TicketsController extends Controller
         $event = Events::where('event_id', $event_id)->get()->first();
         $ticket = Tickets::where('event_id', $event_id)->where('ticket_id', $ticket_id)->get()->first();
         // if (!$ticket->is_issued) {
-            // return view('errors.404');
+        // return view('errors.404');
         // }
         $seat_type = SeatType::getDescription($event->seat_type);
         return view('tickets.show', ['event' => $event, 'ticket' => $ticket, 'seat_type' => $seat_type]);
