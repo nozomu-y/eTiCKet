@@ -2,6 +2,12 @@
 use App\Libs\Common;
 use App\Enums\CollectType;
 use App\Enums\UserRole;
+
+$markdown = $event->memo;
+$parsedown = new Parsedown();
+$parsedown->setBreaksEnabled(true);
+$parsedown->setSafeMode(true);
+$memo_html = $parsedown->text($markdown);
 ?>
 @extends('layouts.main')
 @section('title', $event->name)
@@ -196,6 +202,12 @@ use App\Enums\UserRole;
                     @endif
                 @endif
             @endif
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <?= $memo_html ?>
+                </div>
+            </div>
 
             @if ($ticket->is_issued)
                 <div>
