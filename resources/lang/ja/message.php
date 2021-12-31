@@ -32,6 +32,7 @@ return [
             'success' => 'イベントを追加しました。',
             'collect_personal_information' => '観客の個人情報を収集する場合は以下で指定してください。',
             'memo' => '注意事項などをMarkdown形式で記入してください。',
+            'seat_type_help' => '座席の種類は後から変更することはできません。',
         ],
         'edit' => [
             'success' => 'イベントを編集しました。',
