@@ -126,8 +126,9 @@ use App\Enums\CollectType;
                                     class="form-control @error('seat_type') is-invalid @enderror"
                                     value="{{ old('seat_type') }}" required>
                                     <option value="{{ SeatType::RESERVED }}">{{ __('reserved') }}</option>
-                                    {{-- <option value="{{ SeatType::UNRESERVED }}">{{ __('unreserved') }}</option> --}}
+                                    <option value="{{ SeatType::UNRESERVED }}">{{ __('unreserved') }}</option>
                                 </select>
+                                <small id="seat_type_help" class="form-text text-muted">{{ __('message.events.add.seat_type_help') }}</small>
                                 @error('seat_type')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

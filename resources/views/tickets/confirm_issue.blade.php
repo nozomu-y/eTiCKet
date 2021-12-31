@@ -1,5 +1,6 @@
 <?php
 use App\Libs\Common;
+use App\Enums\SeatType;
 ?>
 @extends('layouts.main')
 @section('title', __('issue_tickets_abbrev'))
@@ -45,7 +46,9 @@ use App\Libs\Common;
                         <thead>
                             <tr>
                                 <th class="text-nowrap">{{ __('ticket_no') }}</th>
-                                <th class="text-nowrap">{{ __('seat_no') }}</th>
+                                @if ($event->seat_type == SeatType::RESERVED)
+                                    <th class="text-nowrap">{{ __('seat_no') }}</th>
+                                @endif
                                 <th class="text-nowrap">{{ __('price') }}</th>
                                 <th class="text-nowrap">{{ __('memo') }}</th>
                             </tr>
@@ -57,7 +60,9 @@ use App\Libs\Common;
                                         {{ sprintf('%06d', $ticket['ticket_id']) }}
                                         <input type="hidden" name="check_{{ $ticket['ticket_id'] }}" value="1"></input>
                                     </td>
-                                    <td class="text-nowrap">{{ $ticket['seat'] }}</td>
+                                    @if ($event->seat_type == SeatType::RESERVED)
+                                        <td class="text-nowrap">{{ $ticket['seat'] }}</td>
+                                    @endif
                                     <td class="text-nowrap">{{ Common::format_price($ticket['price']) }}</td>
                                     <td>{{ $ticket['memo'] }}</td>
                                 </tr>
@@ -65,7 +70,8 @@ use App\Libs\Common;
                         </tbody>
                     </table>
                 </div>
-                <button type="submit" class="btn btn-primary" id="submit_button">{{ __('issue_tickets_abbrev') }}</button>
+                <button type="submit" class="btn btn-primary"
+                    id="submit_button">{{ __('issue_tickets_abbrev') }}</button>
             </form>
         </div>
     </div>
@@ -101,7 +107,8 @@ use App\Libs\Common;
             $('table').hide();
             $('#memo_form_group').hide();
             $('#submit_button').prop('disabled', true);
-            $('#submit_button').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+            $('#submit_button').html(
+                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
         });
     </script>
 @endsection

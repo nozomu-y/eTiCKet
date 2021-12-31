@@ -1,5 +1,6 @@
 <?php
 use App\Libs\Common;
+use App\Enums\SeatType;
 ?>
 @extends('layouts.main')
 @section('title', __('issue_tickets_abbrev'))
@@ -40,7 +41,9 @@ use App\Libs\Common;
                             <tr>
                                 <th></th>
                                 <th class="text-nowrap">{{ __('ticket_no') }}</th>
-                                <th class="text-nowrap">{{ __('seat_no') }}</th>
+                                @if ($event->seat_type == SeatType::RESERVED)
+                                    <th class="text-nowrap">{{ __('seat_no') }}</th>
+                                @endif
                                 <th class="text-nowrap">{{ __('price') }}</th>
                                 <th class="text-nowrap">{{ __('memo') }}</th>
                             </tr>
@@ -56,7 +59,9 @@ use App\Libs\Common;
                                             </div>
                                         </td>
                                         <td class="text-nowrap">{{ sprintf('%06d', $ticket->ticket_id) }}</td>
-                                        <td class="text-nowrap">{{ $ticket->seat }}</td>
+                                        @if ($event->seat_type == SeatType::RESERVED)
+                                            <td class="text-nowrap">{{ $ticket->seat }}</td>
+                                        @endif
                                         <td class="text-nowrap">{{ Common::format_price($ticket->price) }}</td>
                                         <td>{{ $ticket->memo }}</td>
                                     </tr>
@@ -65,7 +70,8 @@ use App\Libs\Common;
                         </tbody>
                     </table>
                 </div>
-                <button type="submit" class="btn btn-primary" id="submit_button">{{ __('issue_tickets_abbrev') }}</button>
+                <button type="submit" class="btn btn-primary"
+                    id="submit_button">{{ __('issue_tickets_abbrev') }}</button>
             </form>
         </div>
     </div>
@@ -99,11 +105,12 @@ use App\Libs\Common;
             });
         });
 
-        $('form').on('submit', function (e) {
+        $('form').on('submit', function(e) {
             $('.dataTable').DataTable().destroy();
             $('table').hide();
             $('#submit_button').prop('disabled', true);
-            $('#submit_button').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+            $('#submit_button').html(
+                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
         });
     </script>
 @endsection
