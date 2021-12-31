@@ -44,6 +44,16 @@ class GuestTicketsController extends Controller
                 $personal_info_unentered = true;
             }
         }
+        $personal_info_disabled = true;
+        if ($event->collect_name != CollectType::DISABLED) {
+            $personal_info_disabled = false;
+        }
+        if ($event->collect_email != CollectType::DISABLED) {
+            $personal_info_disabled = false;
+        }
+        if ($event->collect_phone_number != CollectType::DISABLED) {
+            $personal_info_disabled = false;
+        }
 
         return view('tickets.show', [
             'event' => $event,
@@ -51,6 +61,7 @@ class GuestTicketsController extends Controller
             'personal_info' => $personal_info,
             'seat_type' => $seat_type,
             'personal_info_unentered' => $personal_info_unentered,
+            'personal_info_disabled' => $personal_info_disabled,
         ]);
     }
 
