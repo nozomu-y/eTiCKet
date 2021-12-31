@@ -1,6 +1,7 @@
 <?php
 use App\Libs\Common;
 use App\Enums\UserRole;
+use App\Enums\SeatType;
 ?>
 @extends('layouts.main')
 @section('title', __('ticket_list'))
@@ -73,7 +74,9 @@ use App\Enums\UserRole;
                     <thead>
                         <tr>
                             <th class="text-nowrap">{{ __('ticket_no') }}</th>
-                            <th class="text-nowrap">{{ __('seat_no') }}</th>
+                            @if ($event->seat_type == SeatType::RESERVED)
+                                <th class="text-nowrap">{{ __('seat_no') }}</th>
+                            @endif
                             <th class="text-nowrap">{{ __('price') }}</th>
                             <th class="text-nowrap">{{ __('issue') }}</th>
                             <th class="text-nowrap">{{ __('check_in') }}</th>
@@ -96,7 +99,9 @@ use App\Enums\UserRole;
                                     onclick="window.location='{{ route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}'">
                             @endif
                             <td class="text-nowrap">{{ sprintf('%06d', $ticket->ticket_id) }}</td>
-                            <td class="text-nowrap">{{ $ticket->seat }}</td>
+                            @if ($event->seat_type == SeatType::RESERVED)
+                                <td class="text-nowrap">{{ $ticket->seat }}</td>
+                            @endif
                             <td class="text-nowrap">{{ Common::format_price($ticket->price) }}</td>
                             <td class="text-nowrap">{{ $ticket->is_issued ? __('done') : '' }}</td>
                             <td class="text-nowrap">{{ $ticket->is_checked_in ? __('done') : '' }}</td>

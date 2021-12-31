@@ -17,7 +17,7 @@
                 <div class="card-header">{{ __('add_tickets_abbrev') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('post_add_reserved_tickets', ['event_id' => $event->event_id]) }}">
+                    <form method="POST" action="{{ route('post_add_unreserved_tickets', ['event_id' => $event->event_id]) }}">
                         @csrf
 
                         <div class="form-group row">
@@ -34,20 +34,17 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="seat_list" class="col-md-4 col-form-label text-md-right">{{ __('seat_list') }}</label>
+                            <label for="ticket_num" class="col-md-4 col-form-label text-md-right">{{ __('ticket_num') }}</label>
                             <div class="col-md-6">
-                                <textarea id="seat_list" rows="5" class="form-control @error('seat_list') is-invalid @enderror"
-                                    name="seat_list" value="{{ old('seat_list') }}"
-                                    required></textarea>
-                                <small id="seat_list_help" class="form-text text-muted">{{ __('message.tickets.form.seat_list_help') }}</small>
-                                @error('seat_list')
+                                <input id="ticket_num" type="number" class="form-control @error('ticket_num') is-invalid @enderror"
+                                    name="ticket_num" value="{{ old('ticket_num') }}" required>
+                                @error('ticket_num')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
-
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
