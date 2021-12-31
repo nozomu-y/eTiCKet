@@ -55,6 +55,7 @@
     "delete_ticket": "チケットを削除する",
     "issue_tickets": "チケットを発券する",
     "issue_tickets_abbrev": "チケット発券",
+    "ticket_num": "チケット枚数",
     "confirm": "確認",
     "issued": "発券済み",
     "ticket_memo": "メモ（任意）",

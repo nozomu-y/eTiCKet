@@ -21,7 +21,7 @@ class TicketsController extends Controller
     function index($event_id)
     {
         $event = Events::where('event_id', $event_id)->get()->first();
-        $tickets = DB::select(DB::raw('SELECT * FROM tickets left outer join (select name, email, phone_number, ticket_id as ticket_id_ from personal_informations where event_id=' . $event_id . ') as c on tickets.ticket_id = c.ticket_id_ WHERE tickets.event_id=' . $event_id .' ORDER BY ticket_id'));
+        $tickets = DB::select(DB::raw('SELECT * FROM tickets left outer join (select name, email, phone_number, ticket_id as ticket_id_ from personal_informations where event_id=' . $event_id . ') as c on tickets.ticket_id = c.ticket_id_ WHERE tickets.event_id=' . $event_id . ' ORDER BY ticket_id'));
         return view(
             'tickets.list',
             [
@@ -36,10 +36,12 @@ class TicketsController extends Controller
         $event = Events::where('event_id', $event_id)->get()->first();
         if ($event->seat_type == SeatType::RESERVED) {
             return view('tickets.add_reserved', ['event' => $event]);
+        } else {
+            return view('tickets.add_unreserved', ['event' => $event]);
         }
     }
 
-    function post_add(Request $request, $event_id)
+    function post_add_reserved(Request $request, $event_id)
     {
         $validator =  Validator::make($request->all(), [
             'price' => ['required', 'integer', 'min:0'],
@@ -68,6 +70,32 @@ class TicketsController extends Controller
             $ticket->event_id = $event_id;
             $ticket->price = $price;
             $ticket->seat = $data;
+            $ticket->save();
+        }
+        $event->ticket_id_max = $ticket_id;
+        $event->save();
+        return redirect()->route('tickets', ['event_id' => $event_id])->with('success', __('message.tickets.add.success'));
+    }
+
+    function post_add_unreserved(Request $request, $event_id)
+    {
+        $validator =  Validator::make($request->all(), [
+            'price' => ['required', 'integer', 'min:0'],
+        ]);
+        $validator->validate();
+        $ticket_num = intval($request['ticket_num']);
+        $price = $request['price'];
+
+        $event = Events::where('event_id', $event_id)->get()->first();
+
+        $ticket_id = $event->ticket_id_max;
+        for ($i = 0; $i < $ticket_num; $i++) {
+            $ticket_id = $ticket_id + 1;
+
+            $ticket = new Tickets();
+            $ticket->ticket_id = $ticket_id;
+            $ticket->event_id = $event_id;
+            $ticket->price = $price;
             $ticket->save();
         }
         $event->ticket_id_max = $ticket_id;

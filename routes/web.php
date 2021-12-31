@@ -52,7 +52,8 @@ Route::group(['middleware' => 'admin'], function () {
 });
 Route::get('events/{event_id}/tickets', [TicketsController::class, 'index'])->where('event_id', '[0-9]+')->name('tickets');
 Route::get('events/{event_id}/tickets/add', [TicketsController::class, 'add'])->where('event_id', '[0-9]+')->name('add_tickets');
-Route::post('events/{event_id}/tickets/add', [TicketsController::class, 'post_add'])->where('event_id', '[0-9]+')->name('post_add_tickets');
+Route::post('events/{event_id}/tickets/add_reserved', [TicketsController::class, 'post_add_reserved'])->where('event_id', '[0-9]+')->name('post_add_reserved_tickets');
+Route::post('events/{event_id}/tickets/add_unreserved', [TicketsController::class, 'post_add_unreserved'])->where('event_id', '[0-9]+')->name('post_add_unreserved_tickets');
 Route::get('events/{event_id}/tickets/issue', [TicketsController::class, 'issue'])->where('event_id', '[0-9]+')->name('issue_tickets');
 Route::post('events/{event_id}/tickets/issue/confirm', [TicketsController::class, 'post_confirm_issue'])->where('event_id', '[0-9]+')->name('post_confirm_issue_tickets');
 Route::post('events/{event_id}/tickets/issue', [TicketsController::class, 'post_issue'])->where('event_id', '[0-9]+')->name('post_issue_tickets');
