@@ -79,15 +79,9 @@ class EventsController extends Controller
         $event->name = $request['event_name'];
         $event->place = $request['place'];
         $event->date = $request['date'];
-        if ($request['open_at'] != null) {
-            $event->open_at = $request['open_at'];
-        }
-        if ($request['start_at'] != null) {
-            $event->start_at = $request['start_at'];
-        }
-        if ($request['end_at'] != null) {
-            $event->end_at = $request['end_at'];
-        }
+        $event->open_at = $request['open_at'];
+        $event->start_at = $request['start_at'];
+        $event->end_at = $request['end_at'];
         $event->expire_at = $request['expire_at'];
         $event->collect_name = $request['collect_name'];
         $event->collect_email = $request['collect_email'];
