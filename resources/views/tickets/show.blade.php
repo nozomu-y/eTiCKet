@@ -157,48 +157,50 @@ $memo_html = $parsedown->text($markdown);
                 </div>
             </div>
 
-            @if ($ticket->token != null && url()->current() === route('guest_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]))
-                @if (isset($personal_info_unentered) && $personal_info_unentered && !$ticket->is_checked_in)
-                    <div class="text-center">
-                        <a class="btn btn-primary mb-3"
-                            href="{{ route('guest_contact', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('register_contact') }}</a>
-                    </div>
-                @else
-                    <div class="card mb-3">
-                        <div class="card-header">{{ __('contact') }}</div>
-                        <div class="card-body">
-                            <table>
-                                <tbody>
-                                    @if ($event->collect_name !== CollectType::DISABLED)
-                                        <tr>
-                                            <th class="text-nowrap pr-3">{{ __('name') }}</th>
-                                            <td>{{ Common::is_null_or_empty($personal_info->name) ? __('unentered') : $personal_info->name }}
-                                            </td>
-                                        </tr>
-                                    @endif
-                                    @if ($event->collect_email !== CollectType::DISABLED)
-                                        <tr>
-                                            <th class="text-nowrap pr-3">{{ __('email') }}</th>
-                                            <td>{{ Common::is_null_or_empty($personal_info->email) ? __('unentered') : Common::hide_email($personal_info->email) }}
-                                            </td>
-                                        </tr>
-                                    @endif
-                                    @if ($event->collect_phone_number !== CollectType::DISABLED)
-                                        <tr>
-                                            <th class="text-nowrap pr-3">{{ __('phone_number') }}</th>
-                                            <td>{{ Common::is_null_or_empty($personal_info->phone_number) ? __('unentered') : Common::hide_phone_number($personal_info->phone_number) }}
-                                            </td>
-                                        </tr>
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    @if (!$ticket->is_checked_in)
+            @if (!isset($personal_info_disabled) or !$personal_info_disabled)
+                @if ($ticket->token != null && url()->current() === route('guest_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]))
+                    @if (isset($personal_info_unentered) && $personal_info_unentered && !$ticket->is_checked_in)
                         <div class="text-center">
                             <a class="btn btn-primary mb-3"
-                                href="{{ route('guest_contact', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('edit_contact') }}</a>
+                                href="{{ route('guest_contact', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('register_contact') }}</a>
                         </div>
+                    @else
+                        <div class="card mb-3">
+                            <div class="card-header">{{ __('contact') }}</div>
+                            <div class="card-body">
+                                <table>
+                                    <tbody>
+                                        @if ($event->collect_name !== CollectType::DISABLED)
+                                            <tr>
+                                                <th class="text-nowrap pr-3">{{ __('name') }}</th>
+                                                <td>{{ ($personal_info === null or Common::is_null_or_empty($personal_info->name)) ? __('unentered') : $personal_info->name }}
+                                                </td>
+                                            </tr>
+                                        @endif
+                                        @if ($event->collect_email !== CollectType::DISABLED)
+                                            <tr>
+                                                <th class="text-nowrap pr-3">{{ __('email') }}</th>
+                                                <td>{{ ($personal_info === null or Common::is_null_or_empty($personal_info->email)) ? __('unentered') : Common::hide_email($personal_info->email) }}
+                                                </td>
+                                            </tr>
+                                        @endif
+                                        @if ($event->collect_phone_number !== CollectType::DISABLED)
+                                            <tr>
+                                                <th class="text-nowrap pr-3">{{ __('phone_number') }}</th>
+                                                <td>{{ ($personal_info === null or Common::is_null_or_empty($personal_info->phone_number)) ? __('unentered') : Common::hide_phone_number($personal_info->phone_number) }}
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        @if (!$ticket->is_checked_in)
+                            <div class="text-center">
+                                <a class="btn btn-primary mb-3"
+                                    href="{{ route('guest_contact', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('edit_contact') }}</a>
+                            </div>
+                        @endif
                     @endif
                 @endif
             @endif
