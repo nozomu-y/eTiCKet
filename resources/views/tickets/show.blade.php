@@ -47,8 +47,8 @@ $memo_html = $parsedown->text($markdown);
             </ol>
         </nav>
     @endif
-    <div class="row">
-        <div class="col-lg-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
             @if (session('error'))
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     {{ session('error') }}
@@ -168,7 +168,7 @@ $memo_html = $parsedown->text($markdown);
                         <div class="card mb-3">
                             <div class="card-header">{{ __('contact') }}</div>
                             <div class="card-body">
-                                <table>
+                                <table class="mb-3">
                                     <tbody>
                                         @if ($event->collect_name !== CollectType::DISABLED)
                                             <tr>
@@ -193,14 +193,14 @@ $memo_html = $parsedown->text($markdown);
                                         @endif
                                     </tbody>
                                 </table>
+                                @if (!$ticket->is_checked_in)
+                                    <div class="text-center">
+                                        <a
+                                            href="{{ route('guest_contact', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('edit_contact') }}</a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
-                        @if (!$ticket->is_checked_in)
-                            <div class="text-center">
-                                <a class="btn btn-primary mb-3"
-                                    href="{{ route('guest_contact', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id, 'token' => $ticket->token]) }}">{{ __('edit_contact') }}</a>
-                            </div>
-                        @endif
                     @endif
                 @endif
             @endif
@@ -224,19 +224,14 @@ $memo_html = $parsedown->text($markdown);
             @endif
         </div>
 
-        <div class="col-lg-4 mb-3">
-            @if (url()->current() === route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]))
-                <div class="card">
+        @if (url()->current() === route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]))
+            <div class="col-lg-4">
+                <div class="card mb-3">
                     <div class="card-header">{{ __('memo') }} </div>
                     <div class="card-body">
                         {{ $ticket->memo }}
                     </div>
                 </div>
-            @endif
-        </div>
-
-        <div class="col-lg-4 mb-3">
-            @if (url()->current() === route('show_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]))
                 <div class="list-group mb-4">
                     <a class="list-group-item list-group-item-action"
                         href="{{ route('edit_ticket', ['event_id' => $event->event_id, 'ticket_id' => $ticket->ticket_id]) }}">{{ __('edit_ticket') }}</a>
@@ -255,7 +250,7 @@ $memo_html = $parsedown->text($markdown);
                         @endif
                     @endif
                 </div>
-            @endif
-        </div>
+            </div>
+        @endif
     </div>
 @endsection
