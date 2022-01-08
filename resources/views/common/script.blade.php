@@ -35,25 +35,27 @@ src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-flash-1.6
 </script>
 
 <script>
-    let mybutton = document.getElementById("btn-back-to-top");
-    window.onscroll = function() {
-        scrollFunction();
-    };
-
-    function scrollFunction() {
-        if (
-            document.body.scrollTop > 20 ||
-            document.documentElement.scrollTop > 20
-        ) {
-            mybutton.style.display = "block";
-        } else {
-            mybutton.style.display = "none";
-        }
+    function getScrollBottom() {
+        var scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
+        return window.document.documentElement.scrollHeight - window.document.documentElement.clientHeight - scrollTop;
     }
-    mybutton.addEventListener("click", backToTop);
 
-    function backToTop() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    }
+    $(document).ready(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 30 && getScrollBottom() > 30) {
+                $('#btn-back-to-top').fadeIn();
+            } else {
+                $('#btn-back-to-top').fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        $('#btn-back-to-top').click(function() {
+            $('#btn-back-to-top').tooltip('hide');
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+        $('#btn-back-to-top').tooltip('show');
+    });
 </script>
